@@ -5,8 +5,8 @@ import Landing from './components/landing/Landing';
 import Show from './components/products/Show';
 import Edit from './components/products/Edit';
 import Rent from './components/products/Rent';
-import Login from './components/user/Login'
-import Register from './components/user/Register'
+import Login from './components/user/login/Login'
+import Register from './components/user/register/Register'
 import Profile from './components/user/Profile'
 import Review from './components/user/Review'
 
