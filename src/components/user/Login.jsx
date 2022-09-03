@@ -1,24 +1,19 @@
 import React from 'react';
 import axios from "axios"
-import "./Register.css"
+import "./registerAndLogin.css"
 
 function Login() {
 
     const login = e => {
         e.preventDefault();
-        axios.post("http://localhost:4000/user/register", { 
-            email: e.target.email.value,
-            name: e.target.name.value,
-            phone: e.target.phone.value,
-            password: e.target.password.value,
-         });
+        axios.post("http://localhost:4000/user/login", { email: e.target.email.value, password: e.target.password.value });
     }
 
     return (
         <div className="Auth-form-container">
             <form className="Auth-form" onSubmit={login}>
                 <div className="Auth-form-content">
-                <h3 className="Auth-form-title">Register</h3>
+                <h3 className="Auth-form-title">Sign In</h3>
                 <div className="form-group mt-3">
                     <label>Email address</label>
                     <input
@@ -26,24 +21,6 @@ function Login() {
                     className="form-control mt-1"
                     placeholder="Enter email"
                     name='email'
-                    />
-                </div>
-                <div className="form-group mt-3">
-                    <label>Name</label>
-                    <input
-                    type="text"
-                    className="form-control mt-1"
-                    placeholder="Enter name"
-                    name='name'
-                    />
-                </div>
-                <div className="form-group mt-3">
-                    <label>Phone Number</label>
-                    <input
-                    type="number"
-                    className="form-control mt-1"
-                    placeholder="Enter number"
-                    name='phone'
                     />
                 </div>
                 <div className="form-group mt-3">
