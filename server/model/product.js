@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const { cloudinary } = require("../cloudinary");
+// const { cloudinary } = require("../cloudinary");
 
 
 const productSchema = new Schema({
@@ -23,13 +23,13 @@ const productSchema = new Schema({
 })
 
 // Delete images from cloudinary after deleting the product
-productSchema.post('findOneAndDelete', async function (doc) {
-    if (doc) {
-        // delete images
-        for (let img of doc.images) {
-            await cloudinary.uploader.destroy(img.filename);
-        }
-    }
-});
+// productSchema.post('findOneAndDelete', async function (doc) {
+//     if (doc) {
+//         // delete images
+//         for (let img of doc.images) {
+//             await cloudinary.uploader.destroy(img.filename);
+//         }
+//     }
+// });
 
 module.exports = mongoose.model('Product', productSchema);

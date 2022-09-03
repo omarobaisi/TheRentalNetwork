@@ -1,11 +1,12 @@
 import React from 'react';
+import Container from 'react-bootstrap/Container';
 
-function landing(props) {
+function Landing(props) {
     return (
-        <div>
+        <Container>
             Landing
-        </div>
+        </Container>
     );
 }
 
-export default landing;
+export default Landing;
