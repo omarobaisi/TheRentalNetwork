@@ -2,16 +2,20 @@ import React from 'react';
 import axios from "axios"
 import "./registerAndLogin.css"
 
-function Login() {
+function Login(props) {
 
     const login = e => {
         e.preventDefault();
-        axios.post("http://localhost:4000/user/register", { 
-            email: e.target.email.value,
-            name: e.target.name.value,
-            phone: e.target.phone.value,
+        const info = {
             password: e.target.password.value,
-         });
+            user: {
+                email: e.target.email.value,
+                name: e.target.name.value,
+                phone: e.target.phone.value,
+            }
+        }
+        const user = axios.post("http://localhost:4000/user/register", info);
+        props.newCurrentUser(user.data);
     }
 
     return (

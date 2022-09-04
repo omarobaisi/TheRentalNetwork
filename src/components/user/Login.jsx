@@ -2,11 +2,20 @@ import React from 'react';
 import axios from "axios"
 import "./registerAndLogin.css"
 
-function Login() {
+function Login(props) {
 
-    const login = e => {
-        e.preventDefault();
-        axios.post("http://localhost:4000/user/login", { email: e.target.email.value, password: e.target.password.value });
+    const login = async e => {
+        try {
+            e.preventDefault();
+            const info = {
+                email: e.target.email.value,
+                password: e.target.password.value
+            }
+            const user = await axios.post("http://localhost:4000/user/login", info);
+            props.newCurrentUser(user.data);
+        } catch(e) {
+            
+        }
     }
 
     return (
