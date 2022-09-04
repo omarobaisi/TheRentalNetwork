@@ -4,9 +4,17 @@ import "./registerAndLogin.css"
 
 function Login() {
 
-    const login = e => {
-        e.preventDefault();
-        axios.post("http://localhost:4000/user/login", { email: e.target.email.value, password: e.target.password.value });
+    const login = async e => {
+        try {
+            e.preventDefault();
+            const info = {
+                email: e.target.email.value,
+                password: e.target.password.value
+            }
+            await axios.post("http://localhost:4000/user/login", info);
+        } catch(e) {
+            
+        }
     }
 
     return (
