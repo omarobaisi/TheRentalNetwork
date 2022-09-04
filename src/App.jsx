@@ -1,19 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Navbar from './components/navbar/Navbar';
+import axios from 'axios'
+
+import NavBar from './components/navbar/NavBar';
 import Landing from './components/landing/Landing';
-import Show from './components/products/Show';
-import Edit from './components/products/Edit';
-import Rent from './components/products/Rent';
+import Show from './components/product/Show';
+import Edit from './components/product/Edit';
+import Rent from './components/product/Rent';
 import Login from './components/user/Login'
 import Register from './components/user/Register'
 import Profile from './components/user/Profile'
 import Review from './components/user/Review'
 
 function App() {
+
   return (
     <div>
-      <Navbar />
+      
+      <NavBar />
       <Routes>
         <Route path='/' element={<Landing />} />
         <Route path='/product/:id/show' element={<Show />} />

@@ -1,0 +1,25 @@
+.Card {
+    border: 1px solid black;
+}
+
+.card-image {
+    width: 100%;
+    height: 300px;
+}
+
+.card-name {
+    border-top: 1px solid black;
+    text-align: center;
+    font-size: 30px;
+    padding: 10px 0;
+}
+
+.card-cat-price {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-price, .card-category {
+    font-size: 24px;
+    padding: 10px;
+}
