@@ -14,18 +14,24 @@ import Review from './components/user/Review'
 
 function App() {
 
+  const [currentUser, setCurrentUser] = useState('');
+
+  const newCurrentUser = user => {
+    setCurrentUser(user);
+  }
+
   return (
     <div>
       
-      <NavBar />
+      <NavBar currentUser={currentUser} newCurrentUser={newCurrentUser} />
       <Routes>
         <Route path='/' element={<Landing />} />
         <Route path='/product/:id/show' element={<Show />} />
         <Route path='/product/:id/new' element={<Edit />} />
         <Route path='/product/:id/rent' element={<Rent />} />
 
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login newCurrentUser={newCurrentUser} />} />
+        <Route path='/register' element={<Register newCurrentUser={newCurrentUser} />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/review' element={<Review />} />
       </Routes>
