@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import axios from 'axios'
 
-import NavBar from './components/navbar/NavBar';
+import NavBar from './components/navbar/Navbar';
 import Landing from './components/landing/Landing';
 import Show from './components/product/Show';
 import Edit from './components/product/Edit';
