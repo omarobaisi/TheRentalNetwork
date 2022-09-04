@@ -6,12 +6,15 @@ function Login() {
 
     const login = e => {
         e.preventDefault();
-        axios.post("http://localhost:4000/user/register", { 
-            email: e.target.email.value,
-            name: e.target.name.value,
-            phone: e.target.phone.value,
+        const info = {
             password: e.target.password.value,
-         });
+            user: {
+                email: e.target.email.value,
+                name: e.target.name.value,
+                phone: e.target.phone.value,
+            }
+        }
+        axios.post("http://localhost:4000/user/register", info);
     }
 
     return (
