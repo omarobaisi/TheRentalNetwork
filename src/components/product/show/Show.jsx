@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
+import Moment from 'react-moment';
 import "./Show.css"
 import Carousel from 'react-bootstrap/Carousel';
 import Container from 'react-bootstrap/Container';
@@ -35,14 +36,21 @@ function Show(props) {
         ))}
       </Carousel>
       <div className="product-info">
-        <div className="show-name"><h1>{product.name}</h1></div>
+        <div>
+          <div className="show-name"><h1>{product.name}</h1></div>
+          <div><Moment interval={1000} fromNow>{product.date}</Moment></div>
+        </div>
         <div className="show-price-owner">
-          <h2><Link className="Nav-Link" to={`/profile/${product.owner._id}`}>{product.owner.name}</Link></h2>
+          <h2><Link className="Nav-Link show-profile-link" to={`/profile/${product.owner._id}`}>{product.owner.name}</Link></h2>
           <h2>{product.price}₪</h2>
         </div>
-        <h2>{product.category}</h2>
-        <h2>{product.date}</h2>
-        <div ><Link to={''}><button>Rent</button></Link></div>
+        <div className="description-div">
+          <h4>Desciption</h4>
+          <div>{product.description}</div>
+        </div>
+        {/* <h2>{product.category}</h2> */}
+        {/* <h2>{product.date}</h2> */}
+        <div className="Button-Div"><Link to={''}><button className="Button">Rent</button></Link></div>
       </div>
     </Container>
   );

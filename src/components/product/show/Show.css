@@ -21,15 +21,24 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    padding: 20px;
 }
 
 .show-name {
     text-align: center;
 }
 
+.show-profile-link:hover {
+    color: purple;
+}
+
 .show-price-owner {
     display: flex;
     justify-content: space-between;
+}
+
+.description-div {
+    text-align: center;
 }
 
 @media (max-width: 769px) {
