@@ -11,6 +11,7 @@ import Login from './components/user/Login'
 import Register from './components/user/Register'
 import Profile from './components/user/Profile'
 import Review from './components/user/Review'
+import AddProduct from './components/product/AddProduct';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
         <Route path='/product/:id/show' element={<Show />} />
         <Route path='/product/:id/new' element={<Edit />} />
         <Route path='/product/:id/rent' element={<Rent />} />
+        <Route path='/product/add' element={<AddProduct currentUser={currentUser} />} />
 
         <Route path='/login' element={<Login newCurrentUser={newCurrentUser} />} />
         <Route path='/register' element={<Register newCurrentUser={newCurrentUser} />} />

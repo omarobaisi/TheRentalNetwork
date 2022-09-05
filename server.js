@@ -8,43 +8,41 @@ const methodOverride = require("method-override")
 const LocalStrategy = require("passport-local");                 
 const passport = require("passport");                            
 const session = require('express-session');
-const cors = require('cors');
 
 const app = express();
-const corsOptions ={
-  origin:'http://localhost:3000', 
-  credentials:true,            //access-control-allow-credentials:true
-  optionSuccessStatus:200
-}
-app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "dist")));
 app.use(express.static(path.join(__dirname, "node_modules")));
 app.use(methodOverride("_method"));
 
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 const url = "mongodb://localhost/rent";
-mongoose.connect(url)
-.then(() => {
-  console.log('Mongo Connection Open');
-})
-.catch(err => {
-  console.log('Mongo Connection Error');
-  console.log(err);
-})
+mongoose
+  .connect(url)
+  .then(() => {
+    console.log("Mongo Connection Open");
+  })
+  .catch((err) => {
+    console.log("Mongo Connection Error");
+    console.log(err);
+  });
 
-app.use(session({
-  secret: 'hello',
-  resave: false,
-  saveUninitialized: false
-}))
+app.use(
+  session({
+    secret: "hello",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 const User = require("./server/Model/user");
 
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy({usernameField: 'email'},User.authenticate()));
+passport.use(
+  new LocalStrategy({ usernameField: "email" }, User.authenticate())
+);
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
@@ -66,4 +64,3 @@ const PORT = 4000;
 app.listen(PORT, function () {
   console.log(`Server running on ${PORT}`);
 });
-
