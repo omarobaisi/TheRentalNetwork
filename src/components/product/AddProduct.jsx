@@ -43,10 +43,11 @@ function AddProduct({currentUser}) {
 
     const insertPost = async ()=>{
         let product1 =  product;
-        axios.defaults.withCredentials = true;
-        return axios.post("http://localhost:4000/product" , product1 ).then(res => res._id)
-        .then(id => <navigate to={`/product/${id}/show`}/>)
-        .catch(err => console.log(err))
+        console.log(product1);
+        // axios.defaults.withCredentials = true;
+        // return axios.post("http://localhost:4000/product" , product1 ).then(res => res._id)
+        // .then(id => <navigate to={`/product/${id}/show`}/>)
+        // .catch(err => console.log(err))
     }
 
 
@@ -83,7 +84,7 @@ function AddProduct({currentUser}) {
                     onChange={fileSelectedHandler}/>
                 </div>
                 <div className='text-center'>
-                    <button type="submit" className="btn btn-primary w-25">Save</button>
+                    <button type="submit" className="btn btn-primary w-50">Save</button>
                 </div>
             </form>
             </div>

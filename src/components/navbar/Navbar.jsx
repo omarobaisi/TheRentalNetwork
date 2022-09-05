@@ -22,6 +22,7 @@ function NavBar(props) {
             <Nav className="me-auto">
                 <Link to={"/"}>Home</Link>
                 <Link to={"/product/add"}>New Product</Link>
+                <Link to={"/profile"}>profile</Link>
             </Nav>
             <Nav>
 
