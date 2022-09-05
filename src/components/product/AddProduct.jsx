@@ -77,7 +77,7 @@ function AddProduct({currentUser}) {
                     onChange={fileSelectedHandler}/>
                 </div>
                 <div className='text-center'>
-                    <button type="submit" className="btn btn-primary w-25">Save</button>
+                    <button type="submit" className="btn btn-primary w-50">Save</button>
                 </div>
             </form>
             </div>

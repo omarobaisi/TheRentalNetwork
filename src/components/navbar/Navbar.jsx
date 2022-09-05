@@ -30,7 +30,7 @@ function NavBar(props) {
             </Nav>
             {props.currentUser !== '' ? (
                 [
-                    <Link className='Nav-Link' to={"/profile"} key={"profile"}>{props.currentUser.name}</Link>
+                    <Link className='Nav-Link' to={`/profile/${props.currentUser._id}`} key={"profile"}>{props.currentUser.name}</Link>
                     // <Link className='Nav-Link' onClick={logout}  >Logout</Link>
                 ]
             ) : (

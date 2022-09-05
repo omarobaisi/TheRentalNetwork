@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import axios from 'axios'
 import "./App.css"
 
-import NavBar from './components/navbar/NavBar';
+import NavBar from './components/navbar/Navbar';
 import Landing from './components/landing/Landing';
 import Show from './components/product/show/Show';
 import Edit from './components/product/Edit';
