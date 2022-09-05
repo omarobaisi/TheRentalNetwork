@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import Card from '../product/card/Card';
 import './landing.css'
+import coverImg from "./Cover.jpg"
+import { Link } from 'react-router-dom';
 
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
 function Landing() {
 
@@ -18,9 +18,35 @@ function Landing() {
     }, [])
 
     return (
-        <Container className='cards-container'>
-            {products.map(product => <Card product={product} />)}
-        </Container>
+        <div>
+            <div class="mainImageDiv">
+                <img src={coverImg} alt="" className='mainImage' />\
+                <div className="mainImageCenterDiv">
+                    <div className="mainImageText">Why Buy When You Can Rent</div>
+                </div>
+            </div>
+            <Container className='cards-container'>
+                <div>
+                    <div className='card-container-header'>
+                        <h1>Latest Products</h1>
+                        <Link className='Nav-Link' to={`/product/filter`} key={"moreLatest"}>Show More</Link>
+                    </div>
+                    <div className='latest-cards'>
+                        {products.map(product => <Card product={product} key={product._Id} />)}
+                    </div>
+                </div>
+                <div>
+                    <div className='card-container-header'>
+                        <h1>Special Products</h1>
+                        <Link className='Nav-Link' to={`/product/filter`} key={"moreSpetial"}>Show More</Link>
+                    </div>
+                    <div className='latest-cards'>
+                        {products.map(product => <Card product={product} key={product._id} />)}
+                    </div>
+                </div>
+                <div className='Button-Div'><Link to={`/product/filter`} key={"filter"}><button className='Button'>Show More</button></Link></div>
+            </Container>
+        </div>
     );
 }
 

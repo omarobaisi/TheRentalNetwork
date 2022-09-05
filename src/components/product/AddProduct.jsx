@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { useNavigate,Navigate, useParams } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 
 function AddProduct({currentUser}) {
 
-    console.log(currentUser);
+    const navigate = useNavigate();
     const [images , setImages] =useState([])
     const [product ,setProduct] =useState({})
 
@@ -32,10 +32,8 @@ function AddProduct({currentUser}) {
         let price =e.target.price.value
         let category =e.target.category.value
         let description =e.target.description.value
-        let date =e.target.date.value
-        let owner = currentUser
-        let getImages =fileSelectedHandler
-        let product = {name ,price,category,description,date,images ,owner}
+        // let getImages =fileSelectedHandler
+        let product = {name ,price,category,description,images}
         setProduct(product)
         
     }
@@ -44,8 +42,8 @@ function AddProduct({currentUser}) {
     const insertPost = async ()=>{
         let product1 =  product;
         axios.defaults.withCredentials = true;
-        return axios.post("http://localhost:4000/product" , product1 ).then(res => res._id)
-        .then(id => <navigate to={`/product/${id}/show`}/>)
+        return axios.post("http://localhost:4000/product" , product1 ).then(res => res.data._id)
+        .then(id => navigate(`/product/${id}/show`, { replace: true }))
         .catch(err => console.log(err))
     }
 
@@ -71,10 +69,6 @@ function AddProduct({currentUser}) {
                 <div className="mb-3">
                     <label htmlFor="descriptionInput" className="form-label">Description</label>
                     <input type="text" className="form-control" id="descriptionInput" name="description"/>
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="dateInput" className="form-label">Date</label>
-                    <input type="date" className="form-control" id="dateInput" name='date'/>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="imageInput" className="form-label">Images</label>

@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import "./NavBar.css"
+import logo from "./Logo.png"
 
 
 function NavBar(props) {
@@ -14,27 +16,27 @@ function NavBar(props) {
     }
 
     return (
-        <Navbar bg="dark" variant="dark" expand="md">
+        <Navbar expand="md">
         <Container>
-            <Link to={"/"}><Navbar.Brand>React-Bootstrap</Navbar.Brand></Link>
+            <Link className='Nav-Link' to={"/"}><Navbar.Brand><img className='Nav-Logo' src={logo} alt=""></img></Navbar.Brand></Link>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-                <Link to={"/"}>Home</Link>
-                <Link to={"/product/add"}>New Product</Link>
+                <Link className='Nav-Link' to={"/"} key={"home"}>Home</Link>
+                <Link className='Nav-Link' to={"/product/add"} key={"add"}>New Product</Link>
             </Nav>
             <Nav>
 
             </Nav>
             {props.currentUser !== '' ? (
                 [
-                    <Link to={"/profile"}>{props.currentUser.name}</Link>
-                    // <Link onClick={logout}  >Logout</Link>
+                    <Link className='Nav-Link' to={"/profile"} key={"profile"}>{props.currentUser.name}</Link>
+                    // <Link className='Nav-Link' onClick={logout}  >Logout</Link>
                 ]
             ) : (
                 [
-                    <Link to={"/login"}>Login</Link>,
-                    <Link to={"/register"}>Register</Link>,
+                    <Link className='Nav-Link' to={"/login"} key={"login"}>Login</Link>,
+                    <Link className='Nav-Link' to={"/register"} key={"register"}>Register</Link>,
                 ]
             )}
             </Navbar.Collapse>

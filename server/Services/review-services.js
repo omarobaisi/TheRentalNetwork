@@ -23,11 +23,24 @@ module.exports.getReview = async (req, res) => {
 module.exports.getUserReviews = async (req, res) => {
     try {
         const { userId } = req.params;
-        const user = await Review.findById(userId).populate('reviews');
-        res.send(user)
+        const user = await User.findById(userId).populate('reviews');
+        res.send(user.reviews)
     } catch(e) {
         res.status(404).json({ message: "Coudn't find review", error: e })
     }
+}
+
+module.exports.userAverageReviews = async (req, res) => {
+    let averageReviews = 0
+    const { userId } = req.params;
+    const user = await User.findById(userId).populate('reviews');
+    const userReviews = user.reviews
+    let count = userReviews.length;
+    userReviews.forEach(review => {
+        averageReviews += review.rate
+    })
+    averageReviews = averageReviews / count
+    res.send(averageReviews.toString());
 }
 
 module.exports.newReview = async (req, res) => {

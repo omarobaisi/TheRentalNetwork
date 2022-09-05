@@ -1,0 +1,42 @@
+.product-detail {
+    display: grid;
+    grid-template-columns: 4fr 5fr;
+    margin: auto;
+    border: 1px solid black;
+}
+
+.show-images {
+    display: flex;
+    width: 100%;
+    border-right: 1px solid black;
+}
+
+.show-img {
+    width: 100%;   
+}
+
+/*! Info */
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.show-name {
+    text-align: center;
+}
+
+.show-price-owner {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 769px) {
+    .product-detail {
+        grid-template-columns: 1fr;
+    }
+    .show-images {
+        border-right: 0;
+    }
+}

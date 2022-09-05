@@ -1,8 +1,10 @@
 import React from 'react';
 import axios from "axios"
+import { useNavigate } from "react-router-dom";
 import "./registerAndLogin.css"
 
 function Login(props) {
+    const navigate = useNavigate();
 
     const login = async e => {
         e.preventDefault();
@@ -21,6 +23,7 @@ function Login(props) {
         });
         console.log(user);
         props.newCurrentUser(user.data);
+        navigate("/", { replace: true });
     }
 
     return (
