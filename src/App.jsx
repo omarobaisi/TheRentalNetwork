@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import axios from 'axios'
 
-import NavBar from './components/navbar/Navbar';
+import NavBar from './components/navbar/NavBar';
 import Landing from './components/landing/Landing';
 import Show from './components/product/Show';
 import Edit from './components/product/Edit';
@@ -33,7 +33,7 @@ function App() {
         <Route path='/login' element={<Login newCurrentUser={newCurrentUser} />} />
         <Route path='/register' element={<Register newCurrentUser={newCurrentUser} />} />
         <Route path='/profile' element={<Profile />} />
-        <Route path='/review' element={<Review />} />
+        <Route path='/review/:userId' element={<Review />} />
       </Routes>
     </div>
   );

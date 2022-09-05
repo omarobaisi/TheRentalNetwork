@@ -28,12 +28,13 @@ function NavBar(props) {
             {props.currentUser !== '' ? (
                 [
                     <Link to={"/profile"}>{props.currentUser.name}</Link>,
+                    <Link to={'/review/631375b2ee824d15e0a59a21'}>review</Link>
                     // <Link onClick={logout}  >Logout</Link>
                 ]
             ) : (
                 [
                     <Link to={"/login"}>Login</Link>,
-                    <Link to={"/register"}>Register</Link>
+                    <Link to={"/register"}>Register</Link>,
                 ]
             )}
             </Navbar.Collapse>
