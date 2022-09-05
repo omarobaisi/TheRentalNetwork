@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from "axios"
 import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -6,19 +7,37 @@ import Navbar from 'react-bootstrap/Navbar';
 
 
 function NavBar(props) {
+
+    const logout = async () => {
+        await axios.post("http://localhost:4000/user/logout");
+        props.newCurrentUser('');
+    }
+
     return (
         <Navbar bg="dark" variant="dark" expand="md">
         <Container>
-            <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+            <Link to={"/"}><Navbar.Brand>React-Bootstrap</Navbar.Brand></Link>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-                <Link to={""}><Nav.Link>Home</Nav.Link></Link>
+                <Link to={"/"}>Home</Link>
+                <Link to={"/product/add"}>New Product</Link>
             </Nav>
             <Nav>
-                <Link to={""}><Nav.Link>Link</Nav.Link></Link>
+
             </Nav>
-                </Navbar.Collapse>
+            {props.currentUser !== '' ? (
+                [
+                    <Link to={"/profile"}>{props.currentUser.name}</Link>,
+                    // <Link onClick={logout}  >Logout</Link>
+                ]
+            ) : (
+                [
+                    <Link to={"/login"}>Login</Link>,
+                    <Link to={"/register"}>Register</Link>
+                ]
+            )}
+            </Navbar.Collapse>
         </Container>
         </Navbar>
     );

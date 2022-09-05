@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import axios from 'axios'
 
-import NavBar from './components/navbar/NavBar';
+import NavBar from './components/navbar/Navbar';
 import Landing from './components/landing/Landing';
 import Show from './components/product/Show';
 import Edit from './components/product/Edit';
@@ -15,18 +15,25 @@ import AddProduct from './components/product/AddProduct';
 
 function App() {
 
+  const [currentUser, setCurrentUser] = useState('');
+
+  const newCurrentUser = user => {
+    setCurrentUser(user);
+  }
+
   return (
     <div>
       
-      <NavBar />
+      <NavBar currentUser={currentUser} newCurrentUser={newCurrentUser} />
       <Routes>
         <Route path='/' element={<Landing />} />
         <Route path='/product/:id/show' element={<Show />} />
         <Route path='/product/:id/new' element={<Edit />} />
         <Route path='/product/:id/rent' element={<Rent />} />
-        <Route path='/product/:id/add' element={<AddProduct />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
+        <Route path='/product/add' element={<AddProduct currentUser={currentUser} />} />
+
+        <Route path='/login' element={<Login newCurrentUser={newCurrentUser} />} />
+        <Route path='/register' element={<Register newCurrentUser={newCurrentUser} />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/review' element={<Review />} />
       </Routes>

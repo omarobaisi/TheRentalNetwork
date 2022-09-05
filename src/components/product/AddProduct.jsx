@@ -1,52 +1,57 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-function AddProduct(props) {
-    const id = useParams()
-    console.log(id);
+import { useNavigate,Navigate, useParams } from 'react-router-dom';
+
+function AddProduct({currentUser}) {
+
+    console.log(currentUser);
     const [images , setImages] =useState([])
+    const [product ,setProduct] =useState({})
 
-    const fileSelectedHandler = (e) =>{
+
+    useEffect(()=>{
+
+        insertPost()
+
+    } , [product]) 
+
+
+    const fileSelectedHandler = async (e) =>{
         let files = e.target.files
-        return files
-        // console.log(files);
-        // return files
-        // console.log(files);
-        // return files
-        // const newImages = []
-        // newImages.push([...files])
-        // setImages(newImages )
+        for (const image of files) {
+             images.push(image)
+        }
+        setImages(images)
     }
 
 
-    const handleSubmit =(e) =>{
+    const handleSubmit =async (e) =>{
         e.preventDefault()
-        // let name =e.target.name.value
-        // let price =e.target.price.value
-        // let category =e.target.category.value
-        // let description =e.target.description.value
-        // let date =e.target.date.value
-        let images = fileSelectedHandler()
-        console.log(images);
-        // fileSelectedHandler()
-        // console.log(images);
-        // let product = {name ,price,category,description,date,images}
-        // let producttest = {name ,price,category,description,date}
-        // console.log(product);
-        // insertPost(product)
-        // console.log(producttest);
+        let name =e.target.name.value
+        let price =e.target.price.value
+        let category =e.target.category.value
+        let description =e.target.description.value
+        let date =e.target.date.value
+        let owner = currentUser
+        let getImages =fileSelectedHandler
+        let product = {name ,price,category,description,date,images ,owner}
+        setProduct(product)
+        
     }
 
-    const insertPost = async (product)=>{
-        return axios.post("http://localhost:4000/product" , product ).then(res => res._id)
-        .then(id => <navigate to={`/product/${id}/show`}/>)
-        .catch()
+
+    const insertPost = async ()=>{
+        let product1 =  product;
+        // return axios.post("http://localhost:4000/product" , product1 ).then(res => res._id)
+        // .then(id => <navigate to={`/product/${id}/show`}/>)
+        // .catch(err => console.log(err))
     }
 
 
 
     return (
+        <div>{currentUser ? 
         <div>
             <div className='container mt-5 mb-5 w-50'>
             <form onSubmit={handleSubmit}>
@@ -56,7 +61,7 @@ function AddProduct(props) {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="priceInput" className="form-label">Price</label>
-                    <input type="text" className="form-control" id="priceInput" name='price'/>
+                    <input type="number" className="form-control" id="priceInput" name='price'/>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="categoryInput" className="form-label">Category</label>
@@ -68,7 +73,7 @@ function AddProduct(props) {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="dateInput" className="form-label">Date</label>
-                    <input type="text" className="form-control" id="dateInput" name='date'/>
+                    <input type="date" className="form-control" id="dateInput" name='date'/>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="imageInput" className="form-label">Images</label>
@@ -77,11 +82,13 @@ function AddProduct(props) {
                     onChange={fileSelectedHandler}/>
                 </div>
                 <div className='text-center'>
-                    <button type="submit" className="btn btn-primary w-25">Submit</button>
+                    <button type="submit" className="btn btn-primary w-25">Save</button>
                 </div>
             </form>
             </div>
         </div>
+        :<Navigate to='../../login'/>}
+        </div> 
     );
 }
 

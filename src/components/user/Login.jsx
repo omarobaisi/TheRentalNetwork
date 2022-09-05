@@ -2,7 +2,7 @@ import React from 'react';
 import axios from "axios"
 import "./registerAndLogin.css"
 
-function Login() {
+function Login(props) {
 
     const login = async e => {
         try {
@@ -11,7 +11,8 @@ function Login() {
                 email: e.target.email.value,
                 password: e.target.password.value
             }
-            await axios.post("http://localhost:4000/user/login", info);
+            const user = await axios.post("http://localhost:4000/user/login", info);
+            props.newCurrentUser(user.data);
         } catch(e) {
             
         }

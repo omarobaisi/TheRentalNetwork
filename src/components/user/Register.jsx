@@ -2,7 +2,7 @@ import React from 'react';
 import axios from "axios"
 import "./registerAndLogin.css"
 
-function Login() {
+function Login(props) {
 
     const login = e => {
         e.preventDefault();
@@ -14,7 +14,8 @@ function Login() {
                 phone: e.target.phone.value,
             }
         }
-        axios.post("http://localhost:4000/user/register", info);
+        const user = axios.post("http://localhost:4000/user/register", info);
+        props.newCurrentUser(user.data);
     }
 
     return (
