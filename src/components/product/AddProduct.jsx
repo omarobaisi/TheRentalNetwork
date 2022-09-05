@@ -94,35 +94,3 @@ function AddProduct({currentUser}) {
 
 export default AddProduct;
 
-
-
-//             <form onSubmit={handleSubmit}>
-{/* <div>
-<label>Name</label>
-<input type="text" name='name' placeholder='Enter Product Name '/>
-</div>
-<div>
-<label>Price</label>
-<input type="number" name='price' placeholder='Enter Price'/>
-</div>
-<div>
-<label>Category </label>
-<input type="text" name="Category" placeholder='Enter Category'/>
-</div>
-<div>
-<label>Description</label>
-<textarea type="text" name="description" placeholder="Enter Description"></textarea>
-</div>
-<div>
-<label>Date</label>
-<input type="date" name='date' placeholder='Enter Date'/>
-</div>
-<div>
-<label htmlFor="files" >Images</label> */}
-{/* <input type="file"  id="files" multiple="multiple" accept='image/jpeg , image/png , image/jpg' /> */}
-{/* <input type="file" id="files" multiple accept='image/jpeg , image/png , image/jpg' onChange={fileSelectedHandler} />
-</div>
-<div>
-<button>Add New Product </button>
-</div>
-</form> */}
