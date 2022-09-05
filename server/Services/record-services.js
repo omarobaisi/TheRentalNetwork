@@ -1,5 +1,6 @@
 const Record = require('../Model/rentRecord')
 const Product  = require('../Model/product')
+const Payment = require("../Model/payment");
 
 module.exports.getRecords = async (req, res) => {
     try {
@@ -21,17 +22,19 @@ module.exports.getRecord = async (req, res) => {
 }
 
 module.exports.newRecord = async (req, res) => {
-    try {
-        const { productId } = req.params;
-        let newRecord = new Record();
-        const product = await Product.findById(productId)
-        newRecord.product = product
-        newRecord.renter = req.user
-        newRecord = await newRecord.save()
-        res.send(newRecord)
-    } catch(e) {
-        res.status(404).json({ message: "Coudn't create the record", error: e })
-    }
+    const { productId } = req.params;
+    const { info, payment } = req.body;
+    const newPayment = new Payment(payment);
+    const foundProduct = await Product.findById(productId)
+    let newRecord = new Record({
+        product: foundProduct,
+        renter: req.user,
+        renterInfo: info,
+        payment: payment
+    });
+    await newPayment.save();
+    newRecord = await newRecord.save();
+    res.send(newRecord)
 }
 
 module.exports.updateRecord = async (req, res) => {
