@@ -43,9 +43,10 @@ function AddProduct({currentUser}) {
 
     const insertPost = async ()=>{
         let product1 =  product;
-        // return axios.post("http://localhost:4000/product" , product1 ).then(res => res._id)
-        // .then(id => <navigate to={`/product/${id}/show`}/>)
-        // .catch(err => console.log(err))
+        axios.defaults.withCredentials = true;
+        return axios.post("http://localhost:4000/product" , product1 ).then(res => res._id)
+        .then(id => <navigate to={`/product/${id}/show`}/>)
+        .catch(err => console.log(err))
     }
 
 
