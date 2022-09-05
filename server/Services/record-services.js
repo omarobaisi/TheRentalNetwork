@@ -1,6 +1,5 @@
 const Record = require('../Model/rentRecord')
 const Product  = require('../Model/product')
-const Payment = require("../Model/payment");
 
 module.exports.getRecords = async (req, res) => {
     try {
@@ -24,7 +23,6 @@ module.exports.getRecord = async (req, res) => {
 module.exports.newRecord = async (req, res) => {
     const { productId } = req.params;
     const { info, payment } = req.body;
-    const newPayment = new Payment(payment);
     const foundProduct = await Product.findById(productId)
     let newRecord = new Record({
         product: foundProduct,
@@ -32,7 +30,6 @@ module.exports.newRecord = async (req, res) => {
         renterInfo: info,
         payment: payment
     });
-    await newPayment.save();
     newRecord = await newRecord.save();
     res.send(newRecord)
 }

@@ -11,7 +11,14 @@ const userSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'Review'
         }
-    ]
+    ],
+    payment: {
+        creditCard: {
+            type: Schema.Types.ObjectId,
+            ref: 'CreditCard'
+        },
+        paypal: String
+    }
 })
 
 userSchema.plugin(passportLocalMongoose, {usernameField : "email"});
