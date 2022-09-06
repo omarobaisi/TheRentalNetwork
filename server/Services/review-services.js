@@ -23,32 +23,37 @@ module.exports.getReview = async (req, res) => {
 module.exports.getUserReviews = async (req, res) => {
     try {
         const { userId } = req.params;
-        const user = await Review.findById(userId).populate('reviews');
-        res.send(user)
+        const user = await User.findById(userId).populate('reviews');
+        res.send(user.reviews)
     } catch(e) {
         res.status(404).json({ message: "Coudn't find review", error: e })
     }
 }
 
+module.exports.userAverageReviews = async (req, res) => {
+    let averageReviews = 0
+    const { userId } = req.params;
+    const user = await User.findById(userId).populate('reviews');
+    const userReviews = user.reviews
+    let count = userReviews.length;
+    userReviews.forEach(review => {
+        averageReviews += review.rate
+    })
+    averageReviews = averageReviews / count
+    res.send(averageReviews.toString());
+}
+
 module.exports.newReview = async (req, res) => {
-    try {
-        const { userId } = req.params;
-        if(req.user._id != userId) {
-            const foundUser = await User.findById(userId)
-            const review = req.body
-            let newReview = new Review(review)
-            foundUser.reviews.push(newReview)
-            newReview.reviewed = foundUser
-            newReview.reviewer = req.user
-            await foundUser.save();
-            newReview = await newReview.save()
-            res.send(newReview)
-        } else {
-            res.status(401).json({ message: "You can't review yourself", error: e })
-        }
-    } catch(e) {
-        res.status(404).send(e)
-    }
+    const { userId } = req.params;
+    const review = req.body;
+    const foundUser = await User.findById(userId)
+    let newReview = new Review(review)
+    foundUser.reviews.push(newReview)
+    newReview.reviewed = foundUser
+    newReview.reviewer = req.user
+    await foundUser.save();
+    newReview = await newReview.save()
+    res.send(newReview)
 }
 
 module.exports.updateReview = async (req, res) => {

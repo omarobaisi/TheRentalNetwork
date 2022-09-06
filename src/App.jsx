@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import axios from 'axios'
+import "./App.css"
 
 import NavBar from './components/navbar/Navbar';
 import Landing from './components/landing/Landing';
-import Show from './components/product/Show';
+import Show from './components/product/show/Show';
 import Edit from './components/product/Edit';
 import Rent from './components/product/Rent';
 import Login from './components/user/Login'
@@ -35,7 +36,7 @@ function App() {
         <Route path='/records' element={<Records />} />
         <Route path='/login' element={<Login newCurrentUser={newCurrentUser} />} />
         <Route path='/register' element={<Register newCurrentUser={newCurrentUser} />} />
-        <Route path='/profile' element={<Profile />} />
+        <Route path='/profile/:id' element={<Profile />} />
         <Route path='/review/:userId' element={<Review />} />
       </Routes>
     </div>

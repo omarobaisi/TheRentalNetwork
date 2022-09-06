@@ -6,7 +6,7 @@ const productSchema = new Schema({
     name: {type: String, required: true},
     price: {type: Number, required: true, min: 1},
     category: {type: String, required: true},
-    state: {type: String, required: true, default: 'posted'},
+    state: {type: String, required: true, default: 'posted', enum: ['posted','rented','delivered','returned']},
     images: [],
     description: String,
     date: {type: Date, required: true, default: Date.now},
