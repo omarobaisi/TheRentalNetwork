@@ -15,6 +15,7 @@ import Review from "./components/user/Review";
 import AddProduct from "./components/product/AddProduct";
 import Records from "./components/records/Records";
 import History from "./components/user/History";
+import Filter from "./components/product/filter/filter"
 
 function App() {
   const [currentUser, setCurrentUser] = useState("");
@@ -27,25 +28,17 @@ function App() {
     <div>
       <NavBar currentUser={currentUser} newCurrentUser={newCurrentUser} />
       <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/product/:id/show" element={<Show />} />
-        <Route path="/product/:id/new" element={<Edit />} />
-        <Route path="/product/:id/rent" element={<Rent />} />
-        <Route
-          path="/product/add"
-          element={<AddProduct currentUser={currentUser} />}
-        />
-        <Route path="/records" element={<Records />} />
-        <Route
-          path="/login"
-          element={<Login newCurrentUser={newCurrentUser} />}
-        />
-        <Route
-          path="/register"
-          element={<Register newCurrentUser={newCurrentUser} />}
-        />
-        <Route path="/profile/:id" element={<Profile />} />
-        <Route path="/review/:userId" element={<Review />} />
+        <Route path='/' element={<Landing />} />
+        <Route path='/product/:id/show' element={<Show />} />
+        <Route path='/product/:id/new' element={<Edit />} />
+        <Route path='/product/:id/rent' element={<Rent />} />
+        <Route path='/product/filter' element={<Filter />} />
+        <Route path='/product/add' element={<AddProduct currentUser={currentUser} />} />
+        <Route path='/records' element={<Records />} />
+        <Route path='/login' element={<Login newCurrentUser={newCurrentUser} />} />
+        <Route path='/register' element={<Register newCurrentUser={newCurrentUser} />} />
+        <Route path='/profile/:id' element={<Profile />} />
+        <Route path='/review/:userId' element={<Review />} />
         <Route path="/:userId/history" element={<History />} />
       </Routes>
     </div>

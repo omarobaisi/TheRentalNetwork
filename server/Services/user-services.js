@@ -87,10 +87,12 @@ module.exports.userRecord = async (req, res) => {
       ],
     })
     .populate("renter");
-  recordsArray = [];
+  let recordsArray = [];
   records.forEach((record) => {
-    if (record.renter._id == userId) {
-      recordsArray.push(record);
+    if(record.renter) {
+      if (record.renter._id == userId || record.product.owner._id == userId) {
+        recordsArray.push(record);
+      }
     }
   });
   res.send(recordsArray);
