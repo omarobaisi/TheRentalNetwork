@@ -51,7 +51,7 @@ function AddProduct({currentUser}) {
 
 
     return (
-        // <div>{currentUser ? 
+        <div>{currentUser ? 
         <div>
             <div className='container postContianer mt-5 mb-5 w-50'>
             <div className='post-header'><h1>Create a new product</h1></div>
@@ -84,8 +84,8 @@ function AddProduct({currentUser}) {
             </form>
             </div>
         </div>
-        // :<Navigate to='../../login'/>}
-        // </div> 
+        :<Navigate to='../../login'/>}
+        </div> 
     );
 }
 

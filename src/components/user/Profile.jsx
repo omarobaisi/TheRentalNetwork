@@ -1,21 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import {Link, Navigate, useParams} from 'react-router-dom'
-function Profile(props) {
+function Profile() {
 
     let id = useParams().id
-    const [reviwersNames ,setReviwersNames]=useState(["anas"])
     const [userName , setUser]=useState("")
     const [reviews , setReviews] = useState([])
     const [avgReview ,setAvgReview] = useState(0)
 
     useEffect(()=>{
-        async function fetchData() {
-            await getUserName(id)
-            await getAvgReview()
-            getReviews()
-        }
-        fetchData();
+        getUserName(id)
+        getAvgReview()
+        getReviews()
     },[])
     
     const getUserName = async (id)=>{
@@ -41,21 +37,6 @@ function Profile(props) {
         .catch(err => console.log(err)) 
     }
 
-    const getReviwersNames =async (reviwers)=>{
-        const temp = []
-        reviwers.map(r => {
-            axios.defaults.withCredentials = true;
-            axios.get("http://localhost:4000/user/"+r.reviwersId)
-            .then(res => {
-                let reviwerName = res.data.name
-                const tempReviwer = {reviwerName ,  body:r.body , rate :r.rate}
-                temp.push(tempReviwer)
-            })
-            .catch(err => console.log(err)) 
-        })
-        setReviwersNames(temp)
-    }
-
     const starTages = (rate) =>{
         const  stars = []
         for (let index = 0; index < rate; index++) {
@@ -77,7 +58,7 @@ function Profile(props) {
                 </div>
                 <hr />
                 <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <div className='text-center'><Link to={`/review/${id}`} className="btn btn-primary w-50">Review</Link></div> 
+                <div className='text-center'><Link to={`/review/${id}`}><button className='Button'>Review</button></Link></div> 
                 </div>
                 </div>
             </div>
@@ -86,7 +67,7 @@ function Profile(props) {
                 <hr />
                 {reviews!==[] ? (
                     reviews.map((r, i) => (
-                        <div className='p-2 m-2 border border-info' key={i}>
+                        <div className='p-2 m-2 border' key={i}>
                             <h6>{r.reviewer.name}</h6>
                             <div>{starTages(r.rate)}</div>
                             <p>{r.body}</p>

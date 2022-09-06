@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import axios from "axios";
 import "./App.css";
 
 import NavBar from "./components/navbar/Navbar";
@@ -11,8 +10,8 @@ import Rent from "./components/product/Rent";
 import Login from "./components/user/Login";
 import Register from "./components/user/Register";
 import Profile from "./components/user/Profile";
-import Review from "./components/user/Review";
-import AddProduct from "./components/product/AddProduct";
+import Review from "./components/user/review/Review";
+import Add from "./components/product/Add";
 import Records from "./components/records/Records";
 import History from "./components/user/History";
 import Filter from "./components/product/filter/filter"
@@ -33,12 +32,12 @@ function App() {
         <Route path='/product/:id/new' element={<Edit />} />
         <Route path='/product/:id/rent' element={<Rent />} />
         <Route path='/product/filter' element={<Filter />} />
-        <Route path='/product/add' element={<AddProduct currentUser={currentUser} />} />
+        <Route path='/product/add' element={<Add currentUser={currentUser} />} />
         <Route path='/records' element={<Records />} />
         <Route path='/login' element={<Login newCurrentUser={newCurrentUser} />} />
         <Route path='/register' element={<Register newCurrentUser={newCurrentUser} />} />
         <Route path='/profile/:id' element={<Profile />} />
-        <Route path='/review/:userId' element={<Review />} />
+        <Route path='/review/:userId' element={<Review currentUser={currentUser} />} />
         <Route path="/:userId/history" element={<History />} />
       </Routes>
     </div>
