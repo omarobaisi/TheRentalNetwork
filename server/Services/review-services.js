@@ -31,24 +31,16 @@ module.exports.getUserReviews = async (req, res) => {
 }
 
 module.exports.newReview = async (req, res) => {
-    try {
-        const { userId } = req.params;
-        if(req.user._id != userId) {
-            const foundUser = await User.findById(userId)
-            const review = req.body
-            let newReview = new Review(review)
-            foundUser.reviews.push(newReview)
-            newReview.reviewed = foundUser
-            newReview.reviewer = req.user
-            await foundUser.save();
-            newReview = await newReview.save()
-            res.send(newReview)
-        } else {
-            res.status(401).json({ message: "You can't review yourself", error: e })
-        }
-    } catch(e) {
-        res.status(404).send(e)
-    }
+    const { userId } = req.params;
+    const review = req.body;
+    const foundUser = await User.findById(userId)
+    let newReview = new Review(review)
+    foundUser.reviews.push(newReview)
+    newReview.reviewed = foundUser
+    newReview.reviewer = req.user
+    await foundUser.save();
+    newReview = await newReview.save()
+    res.send(newReview)
 }
 
 module.exports.updateReview = async (req, res) => {

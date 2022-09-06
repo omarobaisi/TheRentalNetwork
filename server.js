@@ -18,6 +18,7 @@ app.use(methodOverride("_method"));
 
 const mongoose = require("mongoose");
 const url = "mongodb://localhost/rent";
+1;
 mongoose
   .connect(url)
   .then(() => {
@@ -40,7 +41,6 @@ const User = require("./server/Model/user");
 
 app.use(passport.initialize());
 app.use(passport.session());
-
 passport.use(
   new LocalStrategy({ usernameField: "email" }, User.authenticate())
 );
@@ -55,6 +55,7 @@ app.use(function (req, res, next) {
     "Access-Control-Allow-Headers",
     "Content-Type, Authorization, Content-Length, X-Requested-With"
   );
+  res.header("Access-Control-Allow-Credentials", true);
   next();
 });
 

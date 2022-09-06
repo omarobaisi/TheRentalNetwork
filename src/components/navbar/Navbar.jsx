@@ -21,19 +21,20 @@ function NavBar(props) {
             <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
                 <Link to={"/"}>Home</Link>
+                <Link to={"/product/add"}>New Product</Link>
             </Nav>
             <Nav>
 
             </Nav>
             {props.currentUser !== '' ? (
                 [
-                    <Link to={"/profile"}>{props.currentUser.name}</Link>,
+                    <Link to={"/profile"}>{props.currentUser.name}</Link>
                     // <Link onClick={logout}  >Logout</Link>
                 ]
             ) : (
                 [
                     <Link to={"/login"}>Login</Link>,
-                    <Link to={"/register"}>Register</Link>
+                    <Link to={"/register"}>Register</Link>,
                 ]
             )}
             </Navbar.Collapse>

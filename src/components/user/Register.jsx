@@ -4,7 +4,7 @@ import "./registerAndLogin.css"
 
 function Login(props) {
 
-    const login = e => {
+    const login = async e => {
         e.preventDefault();
         const info = {
             password: e.target.password.value,
@@ -14,7 +14,12 @@ function Login(props) {
                 phone: e.target.phone.value,
             }
         }
-        const user = axios.post("http://localhost:4000/user/register", info);
+        const user = await axios("http://localhost:4000/user/register", {
+            method: "POST",
+            data: info,
+            withCredentials: true
+        });
+        console.log(user);
         props.newCurrentUser(user.data);
     }
 
