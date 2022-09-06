@@ -19,7 +19,7 @@ function Landing() {
 
     return (
         <div>
-            <div class="mainImageDiv">
+            <div className="mainImageDiv">
                 <img src={coverImg} alt="" className='mainImage' />\
                 <div className="mainImageCenterDiv">
                     <div className="mainImageText">Why Buy When You Can Rent</div>

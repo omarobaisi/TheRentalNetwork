@@ -38,4 +38,14 @@
     font-weight: 600;
     color: rgb(34, 34, 34);
   }
-  
+
+  .formButton {
+    width: 100%;
+    margin: auto  ;
+  } 
+
+  @media (max-width: 435px) {
+    .formButton {
+      width: 200px;
+    } 
+  }

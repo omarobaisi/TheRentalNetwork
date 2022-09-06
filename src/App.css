@@ -26,3 +26,14 @@
   background-color: white;
   color: black;
 }
+
+.formButton {
+  width: 100%;
+  margin: auto  ;
+} 
+
+@media (max-width: 435px) {
+  .formButton {
+    width: 200px;
+  } 
+}
