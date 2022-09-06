@@ -2,7 +2,8 @@
     display: grid;
     grid-template-columns: 4fr 5fr;
     margin: auto;
-    border: 1px solid black;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    margin-top: 20px;
 }
 
 .show-images {
