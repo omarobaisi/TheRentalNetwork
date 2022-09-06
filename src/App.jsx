@@ -12,6 +12,7 @@ import Register from './components/user/Register'
 import Profile from './components/user/Profile'
 import Review from './components/user/Review'
 import AddProduct from './components/product/AddProduct';
+import Records from './components/records/Records';
 
 function App() {
 
@@ -31,11 +32,11 @@ function App() {
         <Route path='/product/:id/new' element={<Edit />} />
         <Route path='/product/:id/rent' element={<Rent />} />
         <Route path='/product/add' element={<AddProduct currentUser={currentUser} />} />
-
+        <Route path='/records' element={<Records />} />
         <Route path='/login' element={<Login newCurrentUser={newCurrentUser} />} />
         <Route path='/register' element={<Register newCurrentUser={newCurrentUser} />} />
         <Route path='/profile' element={<Profile />} />
-        <Route path='/review' element={<Review />} />
+        <Route path='/review/:userId' element={<Review />} />
       </Routes>
     </div>
   );

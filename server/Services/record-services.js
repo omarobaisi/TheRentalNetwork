@@ -3,7 +3,14 @@ const Product  = require('../Model/product')
 
 module.exports.getRecords = async (req, res) => {
     try {
-        const records = await Record.find({})
+        const records = await Record.find({}).populate({
+            path: 'product',
+            populate: [
+              {
+                path: 'owner',
+              },
+            ],
+          }).populate("renter")
         res.send(records)
     } catch(e) {
         res.status(404).json({ message: "Coudn't find records", error: e })
