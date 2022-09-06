@@ -10,58 +10,51 @@ function Profile(props) {
     const [avgReview ,setAvgReview] = useState(0)
 
     useEffect(()=>{
-          getUserName(id)
-          getAvgReview()
-          getReviews()
+        async function fetchData() {
+            await getUserName(id)
+            await getAvgReview()
+            getReviews()
+        }
+        fetchData();
     },[])
     
     const getUserName = async (id)=>{
         axios.defaults.withCredentials = true;
-        await axios.get("http://localhost:4000/user/"+ id )
+        axios.get("http://localhost:4000/user/"+ id )
         .then(res => setUser(res.data.name))
         .catch(err => console.log(err))  
     }
 
     const getAvgReview =async ()=>{
         axios.defaults.withCredentials = true;
-        await axios.get("http://localhost:4000/review/average/" + id )
+        axios.get("http://localhost:4000/review/average/" + id )
         .then(res => setAvgReview(res.data))
         .catch(err => console.log(err))    
     }
 
     const getReviews =  async ()=>{
         axios.defaults.withCredentials = true;
-        await axios.get("http://localhost:4000/review/user/" + id )
-        .then(async res => {
-            const reviewdIds = await res.data.map((r)=>(
-            {   
-                reviwersId:r.reviewer,
-                body:r.body,
-                rate:r.rate
-            }
-            ));
-            setReviews(reviewdIds)
-            getReviwersNames(reviewdIds)
+        axios.get("http://localhost:4000/review/user/" + id )
+        .then(res => {
+            setReviews(res.data);
         })
         .catch(err => console.log(err)) 
     }
 
     const getReviwersNames =async (reviwers)=>{
-        const temp = [] 
-        await reviwers.map(async r =>{
+        const temp = []
+        reviwers.map(r => {
             axios.defaults.withCredentials = true;
-            await axios.get("http://localhost:4000/user/"+r.reviwersId)
+            axios.get("http://localhost:4000/user/"+r.reviwersId)
             .then(res => {
                 let reviwerName = res.data.name
                 const tempReviwer = {reviwerName ,  body:r.body , rate :r.rate}
                 temp.push(tempReviwer)
-                 setReviwersNames(temp)
             })
             .catch(err => console.log(err)) 
         })
+        setReviwersNames(temp)
     }
-
-
 
     const starTages = (rate) =>{
         const  stars = []
@@ -91,15 +84,15 @@ function Profile(props) {
             <div className='container mt-5'>
                 <h2>Reviews</h2>
                 <hr />
-                {!reviews===[]? reviews.map((r,index) =>(
-                    <div className='p-2 m-2 border border-info' key={Math.random()}>
-                        {/* <h6>{r.reviewer.username}</h6> */}
-                        <h6>{reviwersNames[index]}</h6>
-                        {starTages(r.rate)}
-                        <p>{r.body}</p>
-                    </div>
-                )):""}
-
+                {reviews!==[] ? (
+                    reviews.map((r, i) => (
+                        <div className='p-2 m-2 border border-info' key={i}>
+                            <h6>{r.reviewer.name}</h6>
+                            <div>{starTages(r.rate)}</div>
+                            <p>{r.body}</p>
+                        </div>
+                    ))
+                ) : ""}
             </div>  
         </div>
         :<Navigate to='../login'/>}
