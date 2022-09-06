@@ -20,15 +20,17 @@ module.exports.getProduct = async (req, res) => {
 };
 
 module.exports.newProduct = async (req, res) => {
-  try {
-    const product = req.body;
-    let newProduct = new Product(product);
-    newProduct.owner = req.user;
-    newProduct = await newProduct.save();
-    res.send(newProduct);
-  } catch (e) {
-    res.status(404).json({ message: "Coudn't create the product", error: e });
-  }
+  console.log(req.body.images);
+  // try {
+  //   const product = req.body;
+  //   let newProduct = new Product(product);
+  //   newProduct.owner = req.user;
+  //   newProduct.images = req.files.map(f => ({ url: f.path, filename: f.filename}))
+  //   newProduct = await newProduct.save();
+  //   res.send(newProduct);
+  // } catch (e) {
+  //   res.status(404).json({ message: "Coudn't create the product", error: e });
+  // }
 };
 
 module.exports.updateProduct = async (req, res) => {
