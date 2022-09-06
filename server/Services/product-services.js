@@ -20,17 +20,16 @@ module.exports.getProduct = async (req, res) => {
 };
 
 module.exports.newProduct = async (req, res) => {
-  console.log(req.body.images);
-  // try {
-  //   const product = req.body;
-  //   let newProduct = new Product(product);
-  //   newProduct.owner = req.user;
-  //   newProduct.images = req.files.map(f => ({ url: f.path, filename: f.filename}))
-  //   newProduct = await newProduct.save();
-  //   res.send(newProduct);
-  // } catch (e) {
-  //   res.status(404).json({ message: "Coudn't create the product", error: e });
-  // }
+  try {
+    const product = req.body;
+    let newProduct = new Product(product);
+    newProduct.owner = req.user;
+    newProduct.images = req.files.map(f => ({ url: f.path, filename: f.filename}))
+    newProduct = await newProduct.save();
+    res.send(newProduct);
+  } catch (e) {
+    res.status(404).json({ message: "Coudn't create the product", error: e });
+  }
 };
 
 module.exports.updateProduct = async (req, res) => {
@@ -55,4 +54,15 @@ module.exports.deleteProduct = async (req, res) => {
   } catch (e) {
     res.status(404).json({ message: "Coudn't delete the product", error: e });
   }
+};
+
+module.exports.filterProduct = async (req, res) => {
+  const { category, productName } = req.query;
+  const filteredProducts = await Product.find({
+    $and:[
+      {"name": { "$regex": productName, "$options": "i"}},
+      {"category": { "$regex": category, "$options": "i"}}
+    ]
+  })
+  res.send(filteredProducts)
 };
