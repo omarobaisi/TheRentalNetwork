@@ -18,7 +18,6 @@ function Login(props) {
             data: info,
             withCredentials: true
       });
-      console.log(user);
       props.newCurrentUser(user.data);
       navigate("/", { replace: true });
     } catch (e) {}

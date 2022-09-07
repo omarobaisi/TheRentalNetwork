@@ -36,7 +36,7 @@ function App() {
         <Route path='/records' element={<Records />} />
         <Route path='/login' element={<Login newCurrentUser={newCurrentUser} />} />
         <Route path='/register' element={<Register newCurrentUser={newCurrentUser} />} />
-        <Route path='/profile/:id' element={<Profile />} />
+        <Route path='/profile/:id' element={<Profile  currentUser={currentUser} />} />
         <Route path='/review/:userId' element={<Review currentUser={currentUser} />} />
         <Route path="/:userId/history" element={<History />} />
       </Routes>

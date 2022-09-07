@@ -9,14 +9,26 @@ import Container from 'react-bootstrap/Container';
 function Show(props) {
   const { id } = useParams();
   const [product, setProduct] = useState();
+  const [avgReview ,setAvgReview] = useState(0)
 
   const getProduct = async () => {
     const product = await axios.get(`http://localhost:4000/product/${id}`);
     setProduct(product.data);
+    getAvgReview(product.data.owner._id)
   };
 
+  const getAvgReview =async (userId)=>{
+    axios.defaults.withCredentials = true;
+    axios.get("http://localhost:4000/review/average/" + userId )
+    .then(res => setAvgReview(res.data))
+    .catch(err => console.log(err))    
+}
+
   useEffect(() => {
-    getProduct();
+    const fetch = async () => {
+      await getProduct();
+    }
+    fetch();
   }, []);
 
   if (product === undefined) return <p>Not product found.</p>;
@@ -41,7 +53,7 @@ function Show(props) {
           <div><Moment interval={1000} fromNow>{product.date}</Moment></div>
         </div>
         <div className="show-price-owner">
-          <h2><Link className="Nav-Link show-profile-link" to={`/profile/${product.owner._id}`}>{product.owner.name}</Link></h2>
+          <div><Link className="Nav-Link show-profile-link" to={`/profile/${product.owner._id}`}>{product.owner.name}</Link>({avgReview}<i class="fa-solid fa-star"></i>)</div>
           <h2>{product.price}₪</h2>
         </div>
         <div className="description-div">
@@ -50,7 +62,7 @@ function Show(props) {
         </div>
         {/* <h2>{product.category}</h2> */}
         {/* <h2>{product.date}</h2> */}
-        <div className="Button-Div"><Link to={''}><button className="Button">Rent</button></Link></div>
+        <div className="Button-Div"><Link to={`/product/${product._id}/rent`}><button className="Button">Rent</button></Link></div>
       </div>
     </Container>
   );
