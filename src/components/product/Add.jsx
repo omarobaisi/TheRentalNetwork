@@ -1,161 +1,166 @@
 import axios from "axios";
 import Joi from "joi";
+import Messages from "../messages/Messages";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
-import "./product.css";
+import { useNavigate, Navigate, navigate } from "react-router-dom";
 
 function AddProduct({ currentUser }) {
   const navigate = useNavigate();
-  let [errorList, SetErrorList] = useState([]);
-  //   const [product, setProduct] = useState({});
-
-  let [product, setProduct] = useState({
+  const [errorList, SetErrorList] = useState([]);
+  const [product, setProduct] = useState({
     name: "",
-    price: 0,
-    category: "",
+    price: "",
+    caterogry: "",
     description: "",
-    Email: "",
-    Password: ""
+    image1: "",
+    image2: "",
+    image3: ""
   });
 
-  const navigateFun = useNavigate();
-
-  function goToPage(path) {
-    navigateFun("/" + path);
-  }
-
-  const submitForm = (e) => {
+  async function submitForm(e) {
     e.preventDefault();
     let ValidationResult = ValidationForm();
     if (ValidationResult.error) {
       ValidationResult = ValidationResult.error.details;
       SetErrorList(ValidationResult);
     } else {
-      goToPage("Home");
+      console.log(product);
+      axios.defaults.withCredentials = true;
+      return axios
+        .post("http://localhost:4000/product", product)
+        .then((res) =>
+          navigate(`/product/${res.data._id}/show`, { replace: true })
+        )
+        .catch((err) => console.log(err));
     }
-  };
+  }
 
-  const handelInputs = (e) => {
+  function handelInputs(e) {
     let OldProduct = { ...product };
     OldProduct[e.target.name] = e.target.value;
     setProduct(OldProduct);
-  };
+  }
 
   function ValidationForm() {
     const schema = Joi.object({
-      name: Joi.string(),
-      price: Joi.number().min(1),
-      category: Joi.number().min(1)
-      //   Email: Joi.string()
-      //     .required()
-      //     .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } }),
-      //   Password: Joi.string().required().pattern(new RegExp("^[a-zA-z0-9]{8,}$"))
+      name: Joi.string().required().min(3).max(20).alphanum(),
+      price: Joi.number().required().min(1),
+      caterogry: Joi.string(),
+      description: Joi.string(),
+      image1: Joi.string(),
+      image2: Joi.string(),
+      image3: Joi.string()
     });
     return schema.validate(product, { abortEarly: false });
   }
-
-  useEffect(() => {
-    insertPost();
-  }, [product]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    let name = e.target.name.value;
-    let price = e.target.price.value;
-    let category = e.target.category.value;
-    let description = e.target.description.value;
-    // let getImages =fileSelectedHandler
-    let product = { name, price, category, description, images };
-    setProduct(product);
-  };
-
-  const insertPost = async () => {
-    let product1 = product;
-    axios.defaults.withCredentials = true;
-    return axios
-      .post("http://localhost:4000/product", product1)
-      .then((res) =>
-        navigate(`/product/${res.data._id}/show`, { replace: true })
-      )
-      .catch((err) => console.log(err));
-  };
 
   if (!currentUser) return <Navigate to="../../login" />;
 
   return (
     <div>
-      <div className="container postContianer mt-5 mb-5 w-50">
-        <div className="post-header">
-          <h1>Create a new product</h1>
+      <Messages errorList={errorList} />
+      <div>
+        <div className="container mt-5 mb-5 w-50">
+          <form onSubmit={submitForm}>
+            <div className="mb-3">
+              <label htmlFor="nameInput" className="form-label">
+                Name
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="nameInput"
+                name="name"
+                required
+                onChange={handelInputs}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="priceInput" className="form-label">
+                Price
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                id="priceInput"
+                name="price"
+                required
+                onChange={handelInputs}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="categoryInput" className="form-label">
+                Category
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="categoryInput"
+                name="caterogry"
+                required
+                onChange={handelInputs}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="descriptionInput" className="form-label">
+                Description
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="descriptionInput"
+                name="description"
+                required
+                onChange={handelInputs}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="imageInput1" className="form-label">
+                First Image
+              </label>
+              <input
+                type="url"
+                className="form-control"
+                id="imageInput1"
+                name="image1"
+                required
+                onChange={handelInputs}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="imageInput2" className="form-label">
+                Second Image
+              </label>
+              <input
+                type="url"
+                className="form-control"
+                id="imageInput2"
+                name="image2"
+                required
+                onChange={handelInputs}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="imageInput3" className="form-label">
+                Third Image
+              </label>
+              <input
+                type="url"
+                className="form-control"
+                id="imageInput3"
+                name="image3"
+                required
+                onChange={handelInputs}
+              />
+            </div>
+            <div className="text-center">
+              <button type="submit" className="btn btn-primary w-50">
+                Save
+              </button>
+            </div>
+          </form>
         </div>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="nameInput" className="form-label">
-              Name
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="nameInput"
-              name="name"
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="priceInput" className="form-label">
-              Price
-            </label>
-            <input
-              type="number"
-              className="form-control"
-              id="priceInput"
-              name="price"
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="categoryInput" className="form-label">
-              Category
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="categoryInput"
-              name="category"
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="descriptionInput" className="form-label">
-              Description
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="descriptionInput"
-              name="description"
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="imageInput" className="form-label">
-              Images
-            </label>
-            <input
-              type="file"
-              className="form-control"
-              id="imageInput"
-              multiple
-              accept="image/jpeg , image/png , image/jpg"
-              onChange={fileSelectedHandler}
-            />
-          </div>
-          <div className="text-center">
-            <button type="submit" className="Button formButton">
-              Create
-            </button>
-          </div>
-        </form>
       </div>
     </div>
   );
