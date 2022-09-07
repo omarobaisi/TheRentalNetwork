@@ -4,6 +4,7 @@ import Messages from "../messages/Messages";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate, Navigate, navigate } from "react-router-dom";
+import "./product.css";
 
 function AddProduct({ currentUser }) {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ function AddProduct({ currentUser }) {
   const [product, setProduct] = useState({
     name: "",
     price: "",
-    caterogry: "",
+    category: "",
     description: "",
     image1: "",
     image2: "",
@@ -24,6 +25,11 @@ function AddProduct({ currentUser }) {
     if (ValidationResult.error) {
       ValidationResult = ValidationResult.error.details;
       SetErrorList(ValidationResult);
+      window.scroll({
+        top: 0,
+        left: 100,
+        behavior: "smooth"
+      });
     } else {
       console.log(product);
       axios.defaults.withCredentials = true;
@@ -46,7 +52,7 @@ function AddProduct({ currentUser }) {
     const schema = Joi.object({
       name: Joi.string().required().min(3).max(20).alphanum(),
       price: Joi.number().required().min(1),
-      caterogry: Joi.string(),
+      category: Joi.string(),
       description: Joi.string(),
       image1: Joi.string(),
       image2: Joi.string(),
@@ -61,7 +67,10 @@ function AddProduct({ currentUser }) {
     <div>
       <Messages errorList={errorList} />
       <div>
-        <div className="container mt-5 mb-5 w-50">
+        <div className="container postContianer mt-5 mb-5 w-50">
+          <div className="post-header">
+            <h1>Add product</h1>
+          </div>
           <form onSubmit={submitForm}>
             <div className="mb-3">
               <label htmlFor="nameInput" className="form-label">
@@ -97,7 +106,7 @@ function AddProduct({ currentUser }) {
                 type="text"
                 className="form-control"
                 id="categoryInput"
-                name="caterogry"
+                name="category"
                 required
                 onChange={handelInputs}
               />
@@ -155,7 +164,7 @@ function AddProduct({ currentUser }) {
               />
             </div>
             <div className="text-center">
-              <button type="submit" className="btn btn-primary w-50">
+              <button type="submit" className="btn btn-success w-100 p-2">
                 Save
               </button>
             </div>
