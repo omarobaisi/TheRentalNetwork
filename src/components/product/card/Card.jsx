@@ -5,7 +5,7 @@ import './Card.css'
 function Card(props) {
     return (
         <div className='Card'>
-            <Link className='Nav-Link' to={`/product/${props.product._id}/show`}>
+            <Link className='Nav-Link Card-Link' to={`/product/${props.product._id}/show`}>
                 <div><img className='card-image' src={props.product.images[0]} alt="" /></div>
                 <div className='card-name'>{props.product.name}</div>
                 <div className='card-cat-price'>

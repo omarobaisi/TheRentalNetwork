@@ -24,6 +24,14 @@ function Show(props) {
     .catch(err => console.log(err))    
 }
 
+const showStars = () => {
+  let a = []
+  for(let i=0; i<avgReview; i++) {
+    a.push(i+1)
+  }
+  return a
+}
+
   useEffect(() => {
     const fetch = async () => {
       await getProduct();
@@ -49,15 +57,17 @@ function Show(props) {
       </Carousel>
       <div className="product-info">
         <div>
-          <div className="show-name"><h1>{product.name}</h1></div>
-          <div><Moment interval={1000} fromNow>{product.date}</Moment></div>
+          <div className="show-name-div"><h1 className="show-name">{product.name}</h1></div>
+          <div>
+            <Link className="show-profile-link" to={`/profile/${product.owner._id}`}>Visit {product.owner.name}</Link>
+          </div>
+          <div>{showStars().map(r => <i class="fa-solid fa-star"></i>)} {avgReview !== 0 ? avgReview : ''}</div>
+          {/* <div><Moment interval={1000} fromNow>{product.date}</Moment></div> */}
         </div>
-        <div className="show-price-owner">
-          <div><Link className="Nav-Link show-profile-link" to={`/profile/${product.owner._id}`}>{product.owner.name}</Link>({avgReview}<i class="fa-solid fa-star"></i>)</div>
+        <div className="show-price">
           <h2>{product.price}₪</h2>
         </div>
         <div className="description-div">
-          <h4>Desciption</h4>
           <div>{product.description}</div>
         </div>
         {/* <h2>{product.category}</h2> */}

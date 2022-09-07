@@ -1,3 +1,7 @@
+body {
+  font-family: 'Fira Sans', sans-serif;
+}
+
 .Nav-Link {
   text-decoration: none;
   color: black;
@@ -5,7 +9,7 @@
 }
 
 .Nav-Link:hover {
-  color: purple;
+  color: #5D983A;
 }
 
 .Button-Div {
@@ -14,8 +18,8 @@
 }
 
 .Button {
-  border: 1px solid #363636;
-  background-color: #363636;
+  border: 1px solid #5D983A;
+  background-color: #5D983A;
   color: white;
   width: 300px;
   height: 50px;

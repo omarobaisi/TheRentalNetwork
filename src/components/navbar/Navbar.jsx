@@ -29,7 +29,7 @@ function NavBar(props) {
       }, []);
 
     return (
-        <Navbar expand="md">
+        <Navbar expand="md" className='navbar'>
         <Container>
             <Link className='Nav-Link' to={"/"}><Navbar.Brand><img className='Nav-Logo' src={logo} alt=""></img></Navbar.Brand></Link>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />

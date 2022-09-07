@@ -10,12 +10,18 @@ const {
   newProduct,
   updateProduct,
   deleteProduct,
-  filterProduct
+  filterProduct,
+  returnProduct,
+  latestTen
 } = require("../Services/product-services");
 
 router.get("/", getProducts);
 
+router.get("/limit", latestTen);
+
 router.get("/filter", filterProduct);
+
+router.get("/return/:productId", returnProduct);
 
 router.get("/:id", getProduct);
 

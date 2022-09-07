@@ -31,7 +31,7 @@ function App() {
         <Route  path='*' element={<PageNotFound/>}/>
         <Route path='/' element={<Landing />} />
         <Route path='/product/:id/show' element={<Show />} />
-        <Route path='/product/:id/new' element={<Edit />} />
+        <Route path='/product/:id/edit' element={<Edit />} />
         <Route path='/product/:id/rent' element={<Rent />} />
         <Route path='/product/filter' element={<Filter />} />
         <Route path='/product/add' element={<Add currentUser={currentUser} />} />

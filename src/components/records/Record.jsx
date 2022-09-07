@@ -1,11 +1,30 @@
 import React, { useState, useEffect } from "react";
-function Record(props) {
+import { Link } from "react-router-dom";
+import axios from "axios"
+function Record({record, userId}) {
+
+  // /:productId/return
+
+  const rent = async () => {
+    axios.get(`http://localhost:4000/product/return/${record.product._id}`)
+  }
+
+  const checkState = () => {
+    if(record.product.state === "rented") {
+      return <button onClick={rent}>Return</button>
+    } else if(record.product.state === "returned") {
+      return <Link to={`/review/${record.product.owner._id}`}><button>Review</button></Link>
+    }
+  }
+
   return (
     <tr>
-      <td>{props.record.renter.name}</td>
-      <td>{props.record.product.owner.name}</td>
-      <td>{props.record.product.name}</td>
-      <td>{props.record.product.state}</td>
+      <td>{record.product.owner.name}</td>
+      <td>{record.product.name}</td>
+      <td>{record.product.state}</td>
+      <td>
+        {checkState()}
+      </td>
     </tr>
   );
 }

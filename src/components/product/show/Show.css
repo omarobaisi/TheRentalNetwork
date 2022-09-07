@@ -3,17 +3,23 @@
     grid-template-columns: 4fr 5fr;
     margin: auto;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
-    margin-top: 20px;
+    margin-top: 30px;
+    padding: 0;
 }
 
 .show-images {
     display: flex;
     width: 100%;
     border-right: 1px solid black;
+    background-color: #363636;
 }
 
 .show-img {
-    width: 100%;   
+    width: 100%; 
+}
+
+.special {
+    margin-top: 70px;
 }
 
 /*! Info */
@@ -23,23 +29,36 @@
     flex-direction: column;
     justify-content: space-around;
     padding: 20px;
+    background-color: #363636;
+    color: white;
+}
+
+.show-name-div {
+    /* text-align: center; */
 }
 
 .show-name {
-    text-align: center;
+    font-size: 30px;
+    margin: 0;
+}
+
+.show-profile-link {
+    text-decoration: none;
+    color: white;
+    padding: 0;
 }
 
 .show-profile-link:hover {
-    color: purple;
+    color: #5D983A;
 }
 
-.show-price-owner {
-    display: flex;
-    justify-content: space-between;
+.show-price {
+    margin-top: 30px;
+    color: #5D983A;
 }
 
 .description-div {
-    text-align: center;
+    /* text-align: center; */
 }
 
 .fa-star {
