@@ -192,7 +192,7 @@ function AddProduct({ currentUser }) {
                 </div>
                 <div className="text-center">
                   <button type="submit" className="btn btn-success w-100 p-2">
-                    Save
+                      Create
                   </button>
                 </div>
             </form>

@@ -11,15 +11,15 @@ function Record({record, userId}) {
 
   const checkState = () => {
     if(record.product.state === "rented") {
-      return <button onClick={rent}>Return</button>
+      return <button className="opertaion" onClick={rent}>Return</button>
     } else if(record.product.state === "returned") {
-      return <Link to={`/review/${record.product.owner._id}`}><button>Review</button></Link>
+      return <Link to={`/review/${record.product.owner._id}`}><button className="opertaion">Review</button></Link>
     }
   }
 
   return (
     <tr>
-      <td>{record.product.owner.name}</td>
+      <td><Link className="Nav-Link" to={`/profile/${record.product.owner._id}`}>{record.product.owner.name}</Link></td>
       <td>{record.product.name}</td>
       <td>{record.product.state}</td>
       <td>

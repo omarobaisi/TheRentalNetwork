@@ -41,6 +41,19 @@ body {
   padding: 30px;
 }
 
+.opertaion {
+  border: 1px solid #5D983A;
+  background-color: #5D983A;
+  color: white;
+  transition: 200ms ease-in-out;
+}
+
+.opertaion:hover {
+  border: 1px solid #5D983A;
+  background-color: white;
+  color: black;
+}
+
 @media (max-width: 435px) {
   .formButton {
     width: 200px;
