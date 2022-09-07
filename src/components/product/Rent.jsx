@@ -5,7 +5,27 @@ import { useParams, useNavigate } from "react-router-dom";
 
 function Rent(props) {
   const navigate = useNavigate();
-
+function validateCard(){
+  return (/^5[1-5]\d{14}$/.test(cardNumber))
+}
+function validateName(){
+  return ((/[A-Za-z]/).test(fullName))
+}
+function validateCity(){
+  return ((/[A-Za-z]/).test(city))
+}
+function validatePhone(){
+  return (/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(phone))
+}
+function validateAddress(){
+  return (/^$|\s+/.test(address))
+}
+function validateCVV(){
+  return (/^[0-9]{3,4}$/.test(CVV))
+}
+function validateExpireDate(){
+  return (/[\d]{2}\/[\d]{4}/.test(expireDate))
+}
   const [fullName, setName] = useState("");
   const [cardNumber, setCardNumber] = useState("");
   const [expireDate, setExpiryDate] = useState("");
@@ -29,9 +49,37 @@ function Rent(props) {
     info,
     payment,
   };
-
   const { id } = useParams();
   const handleSubmit = async (evt) => {
+    if(!validateCard()){
+      alert("Enter a valid card")
+      return
+    }
+    if(!validateName()){
+      alert("Enter a valid name")
+      return
+    }
+    if(!validatePhone()){
+      alert("Enter A valid phone number")
+      return
+    }
+    if(!validateCity()){
+      alert("Enter A valid City")
+      return
+    }
+    if(validateAddress()){
+      alert("Enter a valid Address")
+      return
+    }
+    if(!validateCVV()){
+      alert("Enter A valid CCV")
+      return 
+    }
+    if(!validateExpireDate()){
+      alert("Enter A valid Expiry Date")
+      return
+    }
+    console.log("in got here")
     evt.preventDefault();
     axios.defaults.withCredentials = true;
     console.log(paymentInfo);
@@ -76,7 +124,7 @@ function Rent(props) {
                 <input
                   placeholder="phone number"
                   value={phone}
-                  type="Number"
+                  type="text"
                   onChange={(e) => setPhone(e.target.value)}
                 />
               </div>
