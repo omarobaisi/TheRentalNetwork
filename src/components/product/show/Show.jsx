@@ -50,7 +50,7 @@ function Show(props) {
         </div>
         {/* <h2>{product.category}</h2> */}
         {/* <h2>{product.date}</h2> */}
-        <div className="Button-Div"><Link to={''}><button className="Button">Rent</button></Link></div>
+        <div className="Button-Div"><Link to={`/product/${product._id}/rent`}><button className="Button">Rent</button></Link></div>
       </div>
     </Container>
   );
