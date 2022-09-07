@@ -25,7 +25,6 @@ function App() {
 
   return (
     <div>
-      
       <NavBar currentUser={currentUser} newCurrentUser={newCurrentUser} />
       <Routes>
         <Route  path='*' element={<PageNotFound/>}/>
