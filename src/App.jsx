@@ -15,6 +15,7 @@ import Add from "./components/product/Add";
 import Records from "./components/records/Records";
 import History from "./components/user/History";
 import Filter from "./components/product/filter/filter"
+import PageNotFound from './components/notFound/pageNotFound'
 
 function App() {
   const [currentUser, setCurrentUser] = useState("");
@@ -27,16 +28,17 @@ function App() {
     <div>
       <NavBar currentUser={currentUser} newCurrentUser={newCurrentUser} />
       <Routes>
+        <Route  path='*' element={<PageNotFound/>}/>
         <Route path='/' element={<Landing />} />
         <Route path='/product/:id/show' element={<Show />} />
-        <Route path='/product/:id/new' element={<Edit />} />
+        <Route path='/product/:id/edit' element={<Edit />} />
         <Route path='/product/:id/rent' element={<Rent />} />
         <Route path='/product/filter' element={<Filter />} />
         <Route path='/product/add' element={<Add currentUser={currentUser} />} />
         <Route path='/records' element={<Records />} />
         <Route path='/login' element={<Login newCurrentUser={newCurrentUser} />} />
         <Route path='/register' element={<Register newCurrentUser={newCurrentUser} />} />
-        <Route path='/profile/:id' element={<Profile />} />
+        <Route path='/profile/:id' element={<Profile  currentUser={currentUser} />} />
         <Route path='/review/:userId' element={<Review currentUser={currentUser} />} />
         <Route path="/:userId/history" element={<History />} />
       </Routes>

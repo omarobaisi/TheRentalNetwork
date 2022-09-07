@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from "axios"
 import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
@@ -15,8 +15,21 @@ function NavBar(props) {
         props.newCurrentUser('');
     }
 
+    const getCurrentUser = async () => {
+        try {
+            const user = await axios.get("http://localhost:4000/user/current");
+            props.newCurrentUser(user.data);
+        } catch(e) {
+
+        }
+    }
+
+    useEffect(() => {
+        getCurrentUser();
+      }, []);
+
     return (
-        <Navbar expand="md">
+        <Navbar expand="md" className='navbar'>
         <Container>
             <Link className='Nav-Link' to={"/"}><Navbar.Brand><img className='Nav-Logo' src={logo} alt=""></img></Navbar.Brand></Link>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -30,8 +43,8 @@ function NavBar(props) {
             </Nav>
             {props.currentUser !== '' ? (
                 [
-                    <Link className='Nav-Link' to={`/profile/${props.currentUser._id}`} key={"profile"}>{props.currentUser.name}</Link>
-                    // <Link className='Nav-Link' onClick={logout}  >Logout</Link>
+                    <Link className='Nav-Link' to={`/profile/${props.currentUser._id}`} key={"profile"}>{props.currentUser.name}</Link>,
+                    <div className='Nav-Link' onClick={logout} >Logout</div>
                 ]
             ) : (
                 [

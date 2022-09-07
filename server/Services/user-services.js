@@ -35,7 +35,7 @@ module.exports.register = async (req, res) => {
     const newUser = new User(user);
     const registeredUser = await User.register(newUser, password);
     req.login(registeredUser, (err) => {
-      if (err) res.status(404).json({ message: "Coudn't login", error: e });
+      if (err) res.status(404).json({ message: "Coudn't login", error: err });
       res.send(req.user);
     });
   } catch (e) {

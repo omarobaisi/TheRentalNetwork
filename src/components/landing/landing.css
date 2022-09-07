@@ -31,14 +31,12 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
-    border-top: 1px solid #363636;
-    padding: 40px 0;
+    margin-top: 15px;
+    margin-bottom: 40px;
 }
 
 .card-container-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    
 }
 
 @media (max-width: 1100px) {
@@ -62,7 +60,7 @@
     }
 }
 
-@media(max-width: 560px) {
+@media(max-width: 400px) {
     .latest-cards {
         grid-template-columns: repeat(1, 1fr);
     }

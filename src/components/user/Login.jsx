@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./registerAndLogin.css";
-
+// import Snackbar from '@mui/material/Snackbar';
 function Login(props) {
   const navigate = useNavigate();
 
@@ -18,7 +18,6 @@ function Login(props) {
             data: info,
             withCredentials: true
       });
-      console.log(user);
       props.newCurrentUser(user.data);
       navigate("/", { replace: true });
     } catch (e) {}

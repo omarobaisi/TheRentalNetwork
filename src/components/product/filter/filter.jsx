@@ -48,7 +48,11 @@ function Filter(props) {
         </form>
         <div className="products-container">
           {products.map((product, index) => (
-            <Card product={product} key={index} />
+            product.state === "posted" ? (
+              <Card product={product} key={index} />
+            ) : (
+              ''
+            )
           ))}
         </div>
       </Container>

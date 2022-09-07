@@ -48,8 +48,14 @@ function Records(props) {
             ) {
               return value;
             }
-          })
-          .map((item) => <Record record={item}/>))}
+          })  
+          .map((item) => 
+            item.product.state !== "posted" ? (
+              <Record record={item}/>
+            ) : (
+            ''
+            )
+          ))}
          </tbody>
         </Table>
         </div>

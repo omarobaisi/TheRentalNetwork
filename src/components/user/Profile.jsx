@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import {Link, Navigate, useParams} from 'react-router-dom'
-function Profile() {
+function Profile({currentUser}) {
 
     let id = useParams().id
     const [userName , setUser]=useState("")
@@ -17,7 +17,7 @@ function Profile() {
     const getUserName = async (id)=>{
         axios.defaults.withCredentials = true;
         axios.get("http://localhost:4000/user/"+ id )
-        .then(res => setUser(res.data.name))
+        .then(res => setUser(res.data))
         .catch(err => console.log(err))  
     }
 
@@ -51,14 +51,18 @@ function Profile() {
             <div className='container'>
                 <div className="card w-75 mx-auto mt-5" >
                 <div className="card-body text-center">
-                <h5 className="card-title text-center">{userName}</h5>
+                <h5 className="card-title text-center">{userName.name}</h5>
                 <div className=' mb-5'>
                 <span className="card-title text-center"> [ {avgReview} ] </span>
                 <i className="fa-sharp fa-solid fa-star text-warning"></i>
                 </div>
                 <hr />
                 <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <div className='text-center'><Link to={`/review/${id}`}><button className='Button'>Review</button></Link></div> 
+                {currentUser !== '' && currentUser._id !== userName._id ? (
+                    <div className='text-center'><Link to={`/review/${id}`}><button className='Button'>Review</button></Link></div> 
+                ) : (
+                    <div className='text-center'><Link to={`/${id}/history`}><button className='Button'>History</button></Link></div> 
+                )}
                 </div>
                 </div>
             </div>

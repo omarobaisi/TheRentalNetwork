@@ -54,6 +54,8 @@ module.exports.newRecord = async (req, res) => {
     renterInfo: info,
     payment: payment,
   });
+  foundProduct.state = "rented";
+  await foundProduct.save();
   newRecord = await newRecord.save();
   res.send(newRecord);
 };
