@@ -36,7 +36,9 @@ function NavBar(props) {
             <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
                 <Link className='Nav-Link' to={"/"} key={"home"}>Home</Link>
-                <Link className='Nav-Link' to={"/product/add"} key={"add"}>New Product</Link>
+                {props.currentUser !== '' ? (
+                    <Link className='Nav-Link' to={"/product/add"} key={"add"}>New Product</Link>
+                ) : ('')}
             </Nav>
             <Nav>
 

@@ -24,10 +24,19 @@ function AddProduct({currentUser}) {
         let price =e.target.price.value
         let category =e.target.category.value
         let description =e.target.description.value
+        let images = []
         let image1 =e.target.image1.value
         let image2 =e.target.image2.value
         let image3 =e.target.image3.value
-        let images =[image1, image2, image3]
+        if(image1 !== '') {
+            images.push(image1)
+        }
+        if(image2 !== '') {
+            images.push(image2)
+        }
+        if(image3 !== '') {
+            images.push(image3)
+        }
         let product = {name ,price,category,description,images}
         emptyInputs(e)
         insertPost(product)
@@ -44,7 +53,7 @@ function AddProduct({currentUser}) {
 
     }
     
-    const insertPost = async ()=>{
+    const insertPost = async (product)=>{
         let product1 =  product;
         axios.defaults.withCredentials = true;
         return axios.post("http://localhost:4000/product" , product1 ).then(res => res.data._id)
@@ -57,7 +66,8 @@ function AddProduct({currentUser}) {
     return (
         <div>{currentUser ? 
         <div>
-            <div className='container mt-5 mb-5 w-50'>
+            <div className='add-container container mt-5 mb-5 w-50'>
+            <div className="rent-header"><h1>New Product</h1></div>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="nameInput" className="form-label">Name</label>
@@ -69,7 +79,13 @@ function AddProduct({currentUser}) {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="categoryInput" className="form-label">Category</label>
-                    <input type="text" className="form-control" id="categoryInput" name="category"/>
+                    <select id="" name="category" className="form-control">
+                        <option value="">Choose a category</option>
+                        <option value="photography">Photography</option>
+                        <option value="music instrument">Music instrument</option>
+                        <option value="Laptops">Laptops</option>
+                        <option value="tools">Tools</option>
+                    </select>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="descriptionInput" className="form-label">Description</label>
@@ -88,7 +104,7 @@ function AddProduct({currentUser}) {
                     <input type="text" className="form-control" id="imageInput3" name="image3"/>
                 </div>
                 <div className='text-center'>
-                    <button type="submit" className="btn btn-primary w-50">Save</button>
+                    <button type="submit" className="Button formButton">Save</button>
                 </div>
             </form>
             </div>

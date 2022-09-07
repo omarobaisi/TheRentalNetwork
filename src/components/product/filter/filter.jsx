@@ -37,10 +37,16 @@ function Filter(props) {
       <Container className='cards-container'>
         <form className="filter-form" onSubmit={filterProducts}>
           <div className="category">
-            <input type="text" placeholder="Search by category" name="category"  className="filter-input"/>
+            <select id="" name="category" className="filter-input">
+              <option value="">Choose a category</option>
+              <option value="photography">Photography</option>
+              <option value="music instrument">Music instrument</option>
+              <option value="Laptops">Laptops</option>
+              <option value="tools">Tools</option>
+            </select>
           </div>
-          <div className="product-name">
-            <input type="text" placeholder="Search by name" name="productName" className="filter-input" />
+          <div>
+            <input type="text" placeholder="Search by name" name="productName"  className="filter-input"/>
           </div>
           <div className="filter-button">
             <button type="submit" className="Button">Search</button>
