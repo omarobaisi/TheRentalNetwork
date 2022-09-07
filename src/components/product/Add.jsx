@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
+import "./product.css"
 
 function AddProduct({currentUser}) {
 
@@ -52,7 +53,8 @@ function AddProduct({currentUser}) {
     return (
         <div>{currentUser ? 
         <div>
-            <div className='container mt-5 mb-5 w-50'>
+            <div className='container postContianer mt-5 mb-5 w-50'>
+            <div className='post-header'><h1>Create a new product</h1></div>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="nameInput" className="form-label">Name</label>
@@ -77,7 +79,7 @@ function AddProduct({currentUser}) {
                     onChange={fileSelectedHandler}/>
                 </div>
                 <div className='text-center'>
-                    <button type="submit" className="btn btn-primary w-50">Save</button>
+                    <button type="submit" className="Button formButton">Create</button>
                 </div>
             </form>
             </div>

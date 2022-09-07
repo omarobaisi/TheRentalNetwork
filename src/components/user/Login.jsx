@@ -18,7 +18,6 @@ function Login(props) {
             data: info,
             withCredentials: true
       });
-      console.log(user);
       props.newCurrentUser(user.data);
       navigate("/", { replace: true });
     } catch (e) {}
@@ -47,8 +46,8 @@ function Login(props) {
               name="password"
             />
           </div>
-          <div className="d-grid gap-2 mt-3">
-            <button type="submit" className="btn btn-primary">
+          <div className="d-grid gap-2 mt-3 px-2">
+            <button type="submit" className="Button formButton">
               Submit
             </button>
           </div>

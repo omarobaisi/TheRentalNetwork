@@ -1,0 +1,9 @@
+.postContianer {
+    box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+    padding: 30px;
+}
+
+.post-header {
+    text-align: center;
+    margin: 20px 0;
+}

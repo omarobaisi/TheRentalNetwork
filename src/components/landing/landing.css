@@ -45,6 +45,9 @@
     .mainImageText {
         font-size: 34px;
     }
+    .latest-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 @media (max-width: 810px) {
@@ -54,13 +57,13 @@
 }
 
 @media(max-width: 767px) {
-    .cards-container {
+    .latest-cards {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media(max-width: 560px) {
-    .cards-container {
+    .latest-cards {
         grid-template-columns: repeat(1, 1fr);
     }
 }

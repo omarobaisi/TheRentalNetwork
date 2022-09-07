@@ -22,9 +22,23 @@ module.exports.getReview = async (req, res) => {
 
 module.exports.getUserReviews = async (req, res) => {
     try {
-        const { userId } = req.params;
-        const user = await User.findById(userId).populate('reviews');
-        res.send(user.reviews)
+        const userReviews = []
+        const { userId } = req.params;  
+        const user = await User.findById(userId).populate('reviews')
+        const reviews = user.reviews;
+        const length = reviews.length
+        let count = 0
+        reviews.forEach( review => {
+            Review.findById(review._id).populate("reviewer")
+            .then(res => userReviews.push(res))
+            .then(() => {
+                count++;
+                if(count === length) {
+                    res.send(userReviews)
+                }
+            })
+            .catch(e => console.log(e))
+        })
     } catch(e) {
         res.status(404).json({ message: "Coudn't find review", error: e })
     }
@@ -35,12 +49,16 @@ module.exports.userAverageReviews = async (req, res) => {
     const { userId } = req.params;
     const user = await User.findById(userId).populate('reviews');
     const userReviews = user.reviews
-    let count = userReviews.length;
-    userReviews.forEach(review => {
-        averageReviews += review.rate
-    })
-    averageReviews = averageReviews / count
-    res.send(averageReviews.toString());
+    if(userReviews.length !== 0) {
+        let count = userReviews.length;
+        userReviews.forEach(review => {
+            averageReviews += review.rate
+        })
+        averageReviews = averageReviews / count
+        res.send(averageReviews.toString());
+    } else {
+        res.send('0')
+    }
 }
 
 module.exports.newReview = async (req, res) => {

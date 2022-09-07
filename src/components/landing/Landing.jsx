@@ -19,7 +19,7 @@ function Landing() {
 
     return (
         <div>
-            <div class="mainImageDiv">
+            <div className="mainImageDiv">
                 <img src={coverImg} alt="" className='mainImage' />\
                 <div className="mainImageCenterDiv">
                     <div className="mainImageText">Why Buy When You Can Rent</div>
@@ -41,7 +41,13 @@ function Landing() {
                         <Link className='Nav-Link' to={`/product/filter`} key={"moreSpetial"}>Show More</Link>
                     </div>
                     <div className='latest-cards'>
-                        {products.map(product => <Card product={product} key={product._id} />)}
+                        {products.map((product, index) => (
+                            product.state === "posted" ? (
+                                <Card product={product} key={product._id} />
+                            ) : (
+                            ''
+                            )
+                        ))}
                     </div>
                 </div>
                 <div className='Button-Div'><Link to={`/product/filter`} key={"filter"}><button className='Button'>Show More</button></Link></div>

@@ -98,3 +98,21 @@ input::-webkit-input-placeholder {
     justify-content: center;
     align-items: center
 }
+
+.payment-container {
+    height: 500px;
+}
+
+.outer-card {
+    padding: 30px 0;
+    box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+}
+
+.paybtn {
+    background-color: #363636 !important;
+}
+
+.rent-header {
+    text-align: center;
+    margin-bottom: 30px;
+}

@@ -10,6 +10,7 @@ const {
   logout,
   updateUser,
   deleteUser,
+  userRecord,
 } = require("../Services/user-services");
 
 router.get("/", getUsers);
@@ -27,5 +28,7 @@ router.get("/:id", getUserById);
 router.put("/:id", updateUser);
 
 router.delete("/:id", deleteUser);
+
+router.get("/history/:id", userRecord);
 
 module.exports = router;

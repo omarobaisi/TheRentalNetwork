@@ -1,8 +1,11 @@
 import "./rent.css";
 import axios from "axios";
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+
 function Rent(props) {
+  const navigate = useNavigate();
+
   const [fullName, setName] = useState("");
   const [cardNumber, setCardNumber] = useState("");
   const [expireDate, setExpiryDate] = useState("");
@@ -33,15 +36,16 @@ function Rent(props) {
     axios.defaults.withCredentials = true;
     console.log(paymentInfo);
     await axios.post(`http://localhost:4000/record/${id}`, paymentInfo);
+    const product = await axios.get(`http://localhost:4000/product/${id}`);
+    const ownerId = product.data.owner._id
+    navigate(`/${ownerId}/history`, { replace: true });
   };
-//   const handleCardNumber =(e)=>{
-//     if(/^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/.test(cardNumber))
-//   }
   return (
     <div className="payment-container">
       <div className="wrapper">
         <div className="outer-card">
           <div className="forms">
+            <div className="rent-header"><h1>User Info</h1></div>
             <div className="input-items">
               <div className="input-items">
                 <span>Name on card</span>
@@ -106,7 +110,7 @@ function Rent(props) {
               </div>
             </div>
             <div className="input-buttons">
-              <button onClick={handleSubmit} className="paybtn">
+              <button onClick={handleSubmit} className="Button formButton">
                 pay
               </button>
             </div>
