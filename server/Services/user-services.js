@@ -35,7 +35,7 @@ module.exports.register = async (req, res) => {
     const newUser = new User(user);
     const registeredUser = await User.register(newUser, password);
     req.login(registeredUser, (err) => {
-      if (err) res.status(404).json({ message: "Coudn't login", error: err });
+      if (err) res.status(404).json({ message: "Coudn't login", error: e });
       res.send(req.user);
     });
   } catch (e) {
@@ -48,7 +48,10 @@ module.exports.login = async (req, res) => {
 };
 
 module.exports.logout = async (req, res) => {
-  req.logout();
+  req.logout(function(err) {
+    if (err) { res.status(404).json({ message: "Coudn't register", error: err }); }
+    res.end();
+  });
 };
 
 module.exports.updateUser = async (req, res) => {
