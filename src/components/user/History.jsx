@@ -27,15 +27,15 @@ function History(props) {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Renter</th>
             <th>Owner</th>
-            <th>item</th>
-            <th>state</th>
+            <th>Item</th>
+            <th>State</th>
+            <th>operation</th>
           </tr>
         </thead>
         <tbody>
           {renterRecords.map((record, index) => (
-            <Record record={record} key={index} />
+            <Record record={record} key={index} userId={userId} />
           ))}
         </tbody>
       </Table>

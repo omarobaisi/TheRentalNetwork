@@ -10,12 +10,25 @@ import Container from 'react-bootstrap/Container';
 function Landing() {
 
     const [products, setProducts] = useState([]);
+    const [latest, setlatest] = useState([]);
 
     useEffect(() => {
         axios.get("http://localhost:4000/product")
         .then(res => res.data)
         .then(products => setProducts(products))
+        axios.get("http://localhost:4000/product")
+        .then(res => res.data)
+        .then(products => setlatest(products))
+        .then(()=>random())
     }, [])
+
+    const random = () => {
+        const random = [...latest].sort(() => Math.random() - 0.5);
+        while(random.length > 8) {
+            random.pop()
+        }
+        return random
+    }
 
     return (
         <div>
@@ -28,20 +41,24 @@ function Landing() {
             <Container className='cards-container'>
                 <div>
                     <div className='card-container-header'>
-                        <h1>Latest Products</h1>
-                        <Link className='Nav-Link' to={`/product/filter`} key={"moreLatest"}>Show More</Link>
+                        <h2>Latest Products</h2>
                     </div>
                     <div className='latest-cards'>
-                        {products.map(product => <Card product={product} key={product._Id} />)}
+                        {latest.map(product => (
+                            product.state === "posted" ? (
+                                <Card product={product} key={product._id} />
+                            ) : (
+                            ''
+                            )
+                        ))}
                     </div>
                 </div>
                 <div>
-                    <div className='card-container-header'>
-                        <h1>Special Products</h1>
-                        <Link className='Nav-Link' to={`/product/filter`} key={"moreSpetial"}>Show More</Link>
+                    <div className='card-container-header special'>
+                        <h2>Special Products</h2>
                     </div>
                     <div className='latest-cards'>
-                        {products.map((product, index) => (
+                        {random().map((product, index) => (
                             product.state === "posted" ? (
                                 <Card product={product} key={product._id} />
                             ) : (

@@ -16,3 +16,7 @@
     border-top: 1px solid #363636;
     padding: 40px 0;
   }
+
+  .card-image {
+    height: 300px;
+}

@@ -19,12 +19,20 @@ module.exports.getProduct = async (req, res) => {
   }
 };
 
+module.exports.latestTen = async (req, res) => {
+  try { 
+    const product = await Product.find({}).populate("owner").limit(8)
+    res.send(product);
+  } catch (e) {
+    res.status(404).json({ message: "Coudn't find products", error: e });
+  }
+};
+
 module.exports.newProduct = async (req, res) => {
   try {
     const product = req.body;
     let newProduct = new Product(product);
     newProduct.owner = req.user;
-    newProduct.images = req.files.map(f => ({ url: f.path, filename: f.filename}))
     newProduct = await newProduct.save();
     res.send(newProduct);
   } catch (e) {
@@ -65,4 +73,13 @@ module.exports.filterProduct = async (req, res) => {
     ]
   })
   res.send(filteredProducts)
+};
+
+module.exports.returnProduct = async (req, res) => {
+  const { productId } = req.params;
+  const updatedProduct = await Product.findByIdAndUpdate(productId, {state: "returned"}, {
+    new: true,
+    runValidators: true,
+  });
+  res.send(updatedProduct);
 };

@@ -1,3 +1,7 @@
 .Nav-Logo {
     width: 200px;
 }
+
+.navbar {
+    border-bottom: 2px solid #363636;
+}

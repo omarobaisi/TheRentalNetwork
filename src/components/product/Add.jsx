@@ -62,116 +62,142 @@ function AddProduct({ currentUser }) {
   }
 
   if (!currentUser) return <Navigate to="../../login" />;
+    const handleSubmit =async (e) =>{
+        e.preventDefault()
+        let name =e.target.name.value
+        let price =e.target.price.value
+        let category =e.target.category.value
+        let description =e.target.description.value
+        let images = []
+        let image1 =e.target.image1.value
+        let image2 =e.target.image2.value
+        let image3 =e.target.image3.value
+        if(image1 !== '') {
+            images.push(image1)
+        }
+        if(image2 !== '') {
+            images.push(image2)
+        }
+        if(image3 !== '') {
+            images.push(image3)
+        }
+        let product = {name ,price,category,description,images}
+        emptyInputs(e)
+        insertPost(product)
+    }
 
-  return (
-    <div>
-      <Messages errorList={errorList} />
-      <div>
-        <div className="container postContianer mt-5 mb-5 w-50">
-          <div className="post-header">
-            <h1>Add product</h1>
-          </div>
-          <form onSubmit={submitForm}>
-            <div className="mb-3">
-              <label htmlFor="nameInput" className="form-label">
-                Name
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="nameInput"
-                name="name"
-                required
-                onChange={handelInputs}
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="priceInput" className="form-label">
-                Price
-              </label>
-              <input
-                type="number"
-                className="form-control"
-                id="priceInput"
-                name="price"
-                required
-                onChange={handelInputs}
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="categoryInput" className="form-label">
-                Category
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="categoryInput"
-                name="category"
-                required
-                onChange={handelInputs}
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="descriptionInput" className="form-label">
-                Description
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="descriptionInput"
-                name="description"
-                required
-                onChange={handelInputs}
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="imageInput1" className="form-label">
-                First Image
-              </label>
-              <input
-                type="url"
-                className="form-control"
-                id="imageInput1"
-                name="image1"
-                required
-                onChange={handelInputs}
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="imageInput2" className="form-label">
-                Second Image
-              </label>
-              <input
-                type="url"
-                className="form-control"
-                id="imageInput2"
-                name="image2"
-                required
-                onChange={handelInputs}
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="imageInput3" className="form-label">
-                Third Image
-              </label>
-              <input
-                type="url"
-                className="form-control"
-                id="imageInput3"
-                name="image3"
-                required
-                onChange={handelInputs}
-              />
-            </div>
-            <div className="text-center">
-              <button type="submit" className="btn btn-success w-100 p-2">
-                Save
-              </button>
-            </div>
-          </form>
+    const emptyInputs = (e) =>{
+        e.target.name.value=" "
+        e.target.price.value=" "
+        e.target.category.value=" "
+        e.target.description.value=" "
+        e.target.image1.value=" "
+        e.target.image2.value=" "
+        e.target.image3.value=" "
+
+    }
+    
+    const insertPost = async (product)=>{
+        let product1 =  product;
+        axios.defaults.withCredentials = true;
+        return axios.post("http://localhost:4000/product" , product1 ).then(res => res.data._id)
+        .then(id => navigate(`/product/${id}/show`, { replace: true }))
+        .catch(err => console.log(err))
+    }
+
+
+
+    return (
+        <div>
+            <div className='add-container container mt-5 mb-5 w-50'>
+            <div className="rent-header"><h1>New Product</h1></div>
+            <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                    <label htmlFor="nameInput" className="form-label">Name</label>
+                    <input type="text" className="form-control" id="nameInput" name='name'/>
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="priceInput" className="form-label">
+                    Price
+                  </label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="priceInput"
+                    name="price"
+                    required
+                    onChange={handelInputs}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="categoryInput" className="form-label">
+                    Category
+                  </label>
+                  <select id="" name="category" className="form-control" required onChange={handelInputs}>
+                      <option value="">Choose a category</option>
+                      <option value="photography">Photography</option>
+                      <option value="music instrument">Music instrument</option>
+                      <option value="Laptops">Laptops</option>
+                      <option value="tools">Tools</option>
+                  </select>
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="descriptionInput" className="form-label">
+                    Description
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="descriptionInput"
+                    name="description"
+                    required
+                    onChange={handelInputs}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="imageInput1" className="form-label">
+                    First Image
+                  </label>
+                  <input
+                    type="url"
+                    className="form-control"
+                    id="imageInput1"
+                    name="image1"
+                    onChange={handelInputs}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="imageInput2" className="form-label">
+                    Second Image
+                  </label>
+                  <input
+                    type="url"
+                    className="form-control"
+                    id="imageInput2"
+                    name="image2"
+                    onChange={handelInputs}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="imageInput3" className="form-label">
+                    Third Image
+                  </label>
+                  <input
+                    type="url"
+                    className="form-control"
+                    id="imageInput3"
+                    name="image3"
+                    onChange={handelInputs}
+                  />
+                </div>
+                <div className="text-center">
+                  <button type="submit" className="btn btn-success w-100 p-2">
+                    Save
+                  </button>
+                </div>
+            </form>
         </div>
       </div>
-    </div>
   );
 }
 

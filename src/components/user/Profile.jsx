@@ -61,7 +61,7 @@ function Profile({currentUser}) {
                 {currentUser !== '' && currentUser._id !== userName._id ? (
                     <div className='text-center'><Link to={`/review/${id}`}><button className='Button'>Review</button></Link></div> 
                 ) : (
-                    <div className='text-center'><Link to={`/review/${id}`}><button className='Button'>History</button></Link></div> 
+                    <div className='text-center'><Link to={`/${id}/history`}><button className='Button'>History</button></Link></div> 
                 )}
                 </div>
                 </div>
