@@ -2,12 +2,10 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
-import "./product.css"
 
 function AddProduct({currentUser}) {
 
     const navigate = useNavigate();
-    const [images , setImages] =useState([])
     const [product ,setProduct] =useState({})
 
 
@@ -18,13 +16,6 @@ function AddProduct({currentUser}) {
     } , [product]) 
 
 
-    const fileSelectedHandler = async (e) =>{
-        let files = e.target.files
-        for (const image of files) {
-             images.push(image)
-        }
-        setImages(images)
-    }
 
 
     const handleSubmit =async (e) =>{
@@ -33,13 +24,26 @@ function AddProduct({currentUser}) {
         let price =e.target.price.value
         let category =e.target.category.value
         let description =e.target.description.value
-        // let getImages =fileSelectedHandler
+        let image1 =e.target.image1.value
+        let image2 =e.target.image2.value
+        let image3 =e.target.image3.value
+        let images =[image1, image2, image3]
         let product = {name ,price,category,description,images}
-        setProduct(product)
-        
+        emptyInputs(e)
+        insertPost(product)
     }
 
+    const emptyInputs = (e) =>{
+        e.target.name.value=" "
+        e.target.price.value=" "
+        e.target.category.value=" "
+        e.target.description.value=" "
+        e.target.image1.value=" "
+        e.target.image2.value=" "
+        e.target.image3.value=" "
 
+    }
+    
     const insertPost = async ()=>{
         let product1 =  product;
         axios.defaults.withCredentials = true;
@@ -53,8 +57,7 @@ function AddProduct({currentUser}) {
     return (
         <div>{currentUser ? 
         <div>
-            <div className='container postContianer mt-5 mb-5 w-50'>
-            <div className='post-header'><h1>Create a new product</h1></div>
+            <div className='container mt-5 mb-5 w-50'>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="nameInput" className="form-label">Name</label>
@@ -73,13 +76,19 @@ function AddProduct({currentUser}) {
                     <input type="text" className="form-control" id="descriptionInput" name="description"/>
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="imageInput" className="form-label">Images</label>
-                    <input type="file" className="form-control" id="imageInput" 
-                    multiple accept='image/jpeg , image/png , image/jpg' 
-                    onChange={fileSelectedHandler}/>
+                    <label htmlFor="imageInput" className="form-label">First Image</label>
+                    <input type="text" className="form-control" id="imageInput1" name="image1"/>
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="imageInput" className="form-label">Second Image</label>
+                    <input type="text" className="form-control" id="imageInput2" name="image2"/>
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="imageInput" className="form-label">Third Image</label>
+                    <input type="text" className="form-control" id="imageInput3" name="image3"/>
                 </div>
                 <div className='text-center'>
-                    <button type="submit" className="Button formButton">Create</button>
+                    <button type="submit" className="btn btn-primary w-50">Save</button>
                 </div>
             </form>
             </div>
