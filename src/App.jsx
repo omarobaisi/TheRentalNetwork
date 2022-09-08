@@ -30,7 +30,7 @@ function App() {
       <Routes>
         <Route  path='*' element={<PageNotFound/>}/>
         <Route path='/' element={<Landing />} />
-        <Route path='/product/:id/show' element={<Show />} />
+        <Route path='/product/:id/show' element={<Show  currentUser={currentUser} />} />
         <Route path='/product/:id/edit' element={<Edit />} />
         <Route path='/product/:id/rent' element={<Rent />} />
         <Route path='/product/filter' element={<Filter />} />

@@ -1,9 +1,28 @@
 import "./rent.css";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 function Rent(props) {
+
+  const [rentedProduct, setRentedProduct] = useState();
+  const { id } = useParams();
+
+  const fetch = async () => {
+    const product = await axios.get(`http://localhost:4000/product/${id}`);
+    setRentedProduct(product.data);
+  }
+
+  useEffect(() => {
+    fetch();
+  }, []);
+
+
   const navigate = useNavigate();
 function validateCard(){
   return (/^5[1-5]\d{14}$/.test(cardNumber))
@@ -49,7 +68,6 @@ function validateExpireDate(){
     info,
     payment,
   };
-  const { id } = useParams();
   const handleSubmit = async (evt) => {
     if(!validateCard()){
       alert("Enter a valid card")
@@ -89,83 +107,72 @@ function validateExpireDate(){
     navigate(`/${ownerId}/history`, { replace: true });
   };
   return (
-    <div className="payment-container">
-      <div className="wrapper">
-        <div className="outer-card">
-          <div className="forms">
-            <div className="rent-header"><h1>User Info</h1></div>
-            <div className="input-items">
-              <div className="input-items">
-                <span>Name on card</span>
-                <input
-                  placeholder="Samuel Iscon"
-                  value={fullName}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </div>
-              <span>Card Number</span>
-              <input
-                placeholder="card Number"
-                value={cardNumber}
-                onChange={(e) => setCardNumber(e.target.value)}
-              />
-            </div>
-            <div className="one-line">
-              <div className="input-items">
-                <span>City</span>
-                <input
-                  placeholder="Samuel Iscon"
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                />
-              </div>
-              <div className="input-items">
-                <span>Phone</span>
-                <input
-                  placeholder="phone number"
-                  value={phone}
-                  type="Number"
-                  onChange={(e) => setPhone(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div className="input-items">
-              <span>Address</span>
-              <input
-                placeholder="your Address"
-                value={address}
-                onChange={(e) => setAdress(e.target.value)}
-              />
-            </div>
-
-            <div className="one-line">
-              <div className="input-items">
-                <span>Expiry Date</span>
-                <input
-                  placeholder="mm/yyyy"
-                  value={expireDate}
-                  onChange={(e) => setExpiryDate(e.target.value)}
-                />
-              </div>
-              <div className="input-items">
-                <span>CVV</span>
-                <input
-                  placeholder="..."
-                  value={CVV}
-                  onChange={(e) => setCVV(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="input-buttons">
-              <button onClick={handleSubmit} className="Button formButton">
-                pay
-              </button>
-            </div>
+    <Container className='rent-container'>
+      {rentedProduct ? (
+        <div className="rent-product-info">
+          <div className="rent-product-header"><h1>{rentedProduct.name}</h1></div>
+          <div className="rent-price">
+            <div>Price: {rentedProduct.price}</div>
+            <div>Shipping: 0</div>
+            <div>Total: {rentedProduct.price}</div>
           </div>
         </div>
+      ) : ('')}
+      <div className="rent-payment-info">
+      <Form>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Row>
+            <Col>
+              <div className="rent-field">
+                <Form.Label>Phone</Form.Label>
+                <Form.Control type="String" placeholder="name@example.com" value={phone} onChange={(e) => setPhone(e.target.value)}/>
+              </div>
+            </Col>
+            <Col>
+              <div className="rent-field">
+                <Form.Label>City</Form.Label>
+                <Form.Control type="Text" placeholder="name@example.com" value={city} onChange={(e) => setCity(e.target.value)}/>
+              </div>
+            </Col>
+          </Row>
+          <div className="rent-field">
+            <Form.Label>Address</Form.Label>
+            <Form.Control type="Text" placeholder="Address" value={address} onChange={(e) => setAdress(e.target.value)}/>
+          </div>
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <div className="rent-field">
+            <Form.Label>Name on card</Form.Label>
+            <Form.Control type="Text" placeholder="Name on card" value={fullName} onChange={(e) => setName(e.target.value)}/>
+          </div>
+          <div className="rent-field">
+            <Form.Label>Card Number</Form.Label>
+            <Form.Control type="Text" placeholder="5212345678912345" value={cardNumber} onChange={(e) => setCardNumber(e.target.value)}/>
+          </div>
+          <Row>
+            <Col>
+              <div className="rent-field">
+                <Form.Label>Expire date</Form.Label>
+                <Form.Control type="String" placeholder="mm/yyyy" value={expireDate} onChange={(e) => setExpiryDate(e.target.value)}/>
+              </div>
+            </Col>
+            <Col>
+              <div className="rent-field">
+                <Form.Label>CCV</Form.Label>
+                <Form.Control type="Text" placeholder="504" value={CVV} onChange={(e) => setCVV(e.target.value)}/>
+              </div>
+            </Col>
+          </Row>
+        </Form.Group>
+        <div className="input-buttons">
+            <button onClick={handleSubmit} className="Button formButton">
+              Rent
+            </button>
+        </div>
+      </Form>
       </div>
-    </div>
+    </Container>
   );
 }
 

@@ -36,7 +36,7 @@ function Edit(props) {
         behavior: "smooth"
       });
     } else {
-      console.log(product);
+      // console.log(product);
       axios.defaults.withCredentials = true;
       return axios
         .put(`http://localhost:4000/product/${id}`, product)
@@ -146,7 +146,7 @@ function Edit(props) {
                 className="form-control"
                 id="descriptionInput"
                 name="description"
-                required
+
                 onChange={handelInputs}
                 value={product.description}
               />
@@ -160,7 +160,6 @@ function Edit(props) {
                 className="form-control"
                 id="descriptionInput"
                 name="image1"
-                required
                 onChange={handelInputs}
                 value={product.image1}
               />
@@ -174,7 +173,6 @@ function Edit(props) {
                 className="form-control"
                 id="descriptionInput"
                 name="image2"
-                required
                 onChange={handelInputs}
                 value={product.image2}
               />
@@ -188,7 +186,6 @@ function Edit(props) {
                 className="form-control"
                 id="descriptionInput"
                 name="image3"
-                required
                 onChange={handelInputs}
                 value={product.image3}
               />

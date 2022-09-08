@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate, Navigate, navigate } from "react-router-dom";
 import "./product.css";
+import Form from 'react-bootstrap/Form';
 
 function AddProduct({ currentUser }) {
   const navigate = useNavigate();
@@ -113,11 +114,11 @@ function AddProduct({ currentUser }) {
             <div className="rent-header"><h1>New Product</h1></div>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                    <label htmlFor="nameInput" className="form-label">Name</label>
+                    <label htmlFor="nameInput" className="aform-label">Name</label>
                     <input type="text" className="form-control" id="nameInput" name='name'/>
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="priceInput" className="form-label">
+                  <label htmlFor="priceInput" className="aform-label">
                     Price
                   </label>
                   <input
@@ -130,19 +131,19 @@ function AddProduct({ currentUser }) {
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="categoryInput" className="form-label">
+                  <label htmlFor="categoryInput" className="aform-label">
                     Category
                   </label>
-                  <select id="" name="category" className="form-control" required onChange={handelInputs}>
-                      <option value="">Choose a category</option>
-                      <option value="photography">Photography</option>
-                      <option value="music instrument">Music instrument</option>
-                      <option value="Laptops">Laptops</option>
-                      <option value="tools">Tools</option>
-                  </select>
+                  <Form.Select aria-label="Default select example" className="form-control" required onChange={handelInputs} name="category">
+                    <option>Choose a category</option>
+                    <option value="photography">Photography</option>
+                    <option value="music instrument">Music instrument</option>
+                    <option value="Laptops">Laptops</option>
+                    <option value="tools">Tools</option>
+                  </Form.Select>
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="descriptionInput" className="form-label">
+                  <label htmlFor="descriptionInput" className="aform-label">
                     Description
                   </label>
                   <input
@@ -155,7 +156,7 @@ function AddProduct({ currentUser }) {
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="imageInput1" className="form-label">
+                  <label htmlFor="imageInput1" className="aform-label">
                     First Image
                   </label>
                   <input
@@ -167,7 +168,7 @@ function AddProduct({ currentUser }) {
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="imageInput2" className="form-label">
+                  <label htmlFor="imageInput2" className="aform-label">
                     Second Image
                   </label>
                   <input
@@ -179,7 +180,7 @@ function AddProduct({ currentUser }) {
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="imageInput3" className="form-label">
+                  <label htmlFor="imageInput3" className="aform-label">
                     Third Image
                   </label>
                   <input

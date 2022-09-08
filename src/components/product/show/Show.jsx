@@ -6,7 +6,7 @@ import "./Show.css"
 import Carousel from 'react-bootstrap/Carousel';
 import Container from 'react-bootstrap/Container';
 
-function Show(props) {
+function Show({currentUser}) {
   const { id } = useParams();
   const [product, setProduct] = useState();
   const [avgReview ,setAvgReview] = useState(0)
@@ -70,9 +70,14 @@ const showStars = () => {
         <div className="description-div">
           <div>{product.description}</div>
         </div>
-        {/* <h2>{product.category}</h2> */}
-        {/* <h2>{product.date}</h2> */}
-        <div className="Button-Div"><Link to={`/product/${product._id}/rent`}><button className="Button">Rent</button></Link></div>
+
+
+        
+        {product.owner._id === currentUser._id ? (
+          <div className="Button-Div"><Link to={`/product/${product._id}/edit`}><button className="Button">Edit</button></Link></div>
+        ) : (
+          <div className="Button-Div"><Link to={`/product/${product._id}/rent`}><button className="Button">Rent</button></Link></div>
+        )}
       </div>
     </Container>
   );
