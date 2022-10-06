@@ -20,7 +20,9 @@ function Login(props) {
       });
       props.newCurrentUser(user.data);
       navigate("/", { replace: true });
-    } catch (e) {}
+    } catch (e) {
+      console.log(e)
+    }
   };
 
   return (
