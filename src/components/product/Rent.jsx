@@ -14,7 +14,7 @@ function Rent(props) {
   const { id } = useParams();
 
   const fetch = async () => {
-    const product = await axios.get(`http://localhost:4000/product/${id}`);
+    const product = await axios.get(`/product/${id}`);
     setRentedProduct(product.data);
   }
 
@@ -101,8 +101,8 @@ function validateExpireDate(){
     evt.preventDefault();
     axios.defaults.withCredentials = true;
     console.log(paymentInfo);
-    await axios.post(`http://localhost:4000/record/${id}`, paymentInfo);
-    const product = await axios.get(`http://localhost:4000/product/${id}`);
+    await axios.post(`/record/${id}`, paymentInfo);
+    const product = await axios.get(`/product/${id}`);
     const ownerId = product.data.owner._id
     navigate(`/${ownerId}/history`, { replace: true });
   };

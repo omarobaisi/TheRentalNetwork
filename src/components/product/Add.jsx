@@ -35,7 +35,7 @@ function AddProduct({ currentUser }) {
       console.log(product);
       axios.defaults.withCredentials = true;
       return axios
-        .post("http://localhost:4000/product", product)
+        .post("/product", product)
         .then((res) =>
           navigate(`/product/${res.data._id}/show`, { replace: true })
         )
@@ -101,7 +101,7 @@ function AddProduct({ currentUser }) {
     const insertPost = async (product)=>{
         let product1 =  product;
         axios.defaults.withCredentials = true;
-        return axios.post("http://localhost:4000/product" , product1 ).then(res => res.data._id)
+        return axios.post("/product" , product1 ).then(res => res.data._id)
         .then(id => navigate(`/product/${id}/show`, { replace: true }))
         .catch(err => console.log(err))
     }

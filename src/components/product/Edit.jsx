@@ -39,7 +39,7 @@ function Edit(props) {
       // console.log(product);
       axios.defaults.withCredentials = true;
       return axios
-        .put(`http://localhost:4000/product/${id}`, product)
+        .put(`/product/${id}`, product)
         .then((res) =>
           navigate(`/product/${res.data._id}/show`, { replace: true })
         )
@@ -50,7 +50,7 @@ function Edit(props) {
   const getInformationProduct = async () => {
     axios.defaults.withCredentials = true;
     return axios
-      .get(`http://localhost:4000/product/${id}`)
+      .get(`/product/${id}`)
       .then((res) => {
         res = res.data;
         let updatedProduct = {
@@ -242,7 +242,7 @@ export default Edit;
 //     let product1 = product;
 //     axios.defaults.withCredentials = true;
 //     return axios
-//       .post("http://localhost:4000/product", product1)
+//       .post("/product", product1)
 //       .then((res) => res.data._id)
 //       .then((id) => navigate(`/product/${id}/show`, { replace: true }))
 //       .catch((err) => console.log(err));

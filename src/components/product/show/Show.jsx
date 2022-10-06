@@ -12,14 +12,14 @@ function Show({currentUser}) {
   const [avgReview ,setAvgReview] = useState(0)
 
   const getProduct = async () => {
-    const product = await axios.get(`http://localhost:4000/product/${id}`);
+    const product = await axios.get(`/product/${id}`);
     setProduct(product.data);
     getAvgReview(product.data.owner._id)
   };
 
   const getAvgReview =async (userId)=>{
     axios.defaults.withCredentials = true;
-    axios.get("http://localhost:4000/review/average/" + userId )
+    axios.get("/review/average/" + userId )
     .then(res => setAvgReview(res.data))
     .catch(err => console.log(err))    
 }

@@ -30,22 +30,15 @@ const corsOptions = {
 }
 app.use(cors(corsOptions))
 
-
-// app.use(function (req, res, next) {
-//   res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
-//   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-//   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With')
-//   res.header("Access-Control-Allow-Credentials", true);
-//   next()
-// })
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "dist")));
 app.use(express.static(path.join(__dirname, "node_modules")));
+app.use(express.static(path.join(__dirname, 'build')));
 app.use(methodOverride("_method"));
 
 const mongoose = require("mongoose");
-const url = "mongodb://localhost/rent";
+const url = process.env.MONGODB_URI || "mongodb://localhost/rent";
 mongoose
   .connect(url)
   .then(() => {
@@ -79,7 +72,11 @@ app.use("/user", userController);
 app.use("/review", reviewContoller);
 app.use("/record", recordController);
 
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 const PORT = 4000;
-app.listen(PORT, function () {
+app.listen(process.env.PORT || PORT, function () {
   console.log(`Server running on ${PORT}`);
 });

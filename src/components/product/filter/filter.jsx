@@ -8,7 +8,7 @@ function Filter(props) {
   const [products, setProducts] = useState();
 
   const getProducts = async () => {
-    const productsinfo = await axios.get(`http://localhost:4000/product`);
+    const productsinfo = await axios.get(`/product`);
     setProducts(productsinfo.data);
   };
 
@@ -19,7 +19,7 @@ function Filter(props) {
   const filterProducts = async (event) => {
     event.preventDefault();
     const filterdProduct = await axios.get(
-      "http://localhost:4000/product/filter",
+      "/product/filter",
       {
         params: { 
           category: event.target.category.value,

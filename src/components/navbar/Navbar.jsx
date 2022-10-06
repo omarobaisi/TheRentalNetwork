@@ -9,13 +9,13 @@ import logo from "./Logo.png";
 
 function NavBar(props) {
   const logout = () => {
-    axios.post("http://localhost:4000/user/logout");
+    axios.post("/user/logout");
     props.newCurrentUser("");
   };
 
   const getCurrentUser = async () => {
     try {
-      const user = await axios.get("http://localhost:4000/user/current");
+      const user = await axios.get("/user/current");
       props.newCurrentUser(user.data);
     } catch (e) {}
   };

@@ -13,10 +13,10 @@ function Landing() {
     const [latest, setlatest] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:4000/product")
+        axios.get("/product")
         .then(res => res.data)
         .then(products => setProducts(products))
-        axios.get("http://localhost:4000/product")
+        axios.get("/product")
         .then(res => res.data)
         .then(products => setlatest(products))
         .then(()=>random())
