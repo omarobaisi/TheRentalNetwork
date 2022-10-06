@@ -1,5 +1,5 @@
-const Review = require('../Model/review')
-const User = require("../Model/user")
+const Review = require('../model/review')
+const User = require("../model/user")
 
 module.exports.getReviews = async (req, res) => {
     try {

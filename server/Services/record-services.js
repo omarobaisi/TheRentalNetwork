@@ -1,6 +1,6 @@
-const Record = require("../Model/rentRecord");
-const Product = require("../Model/product");
-const User = require("../Model/user");
+const Record = require("../model/rentRecord");
+const Product = require("../model/product");
+const User = require("../model/user");
 
 module.exports.getRecords = async (req, res) => {
   try {
