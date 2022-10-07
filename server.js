@@ -57,7 +57,7 @@ app.use(
   })
 );
 
-const User = require("./server/Model/user");
+const User = require("./server/model/user");
 
 app.use(passport.initialize());
 app.use(passport.session());
